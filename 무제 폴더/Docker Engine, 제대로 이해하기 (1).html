@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)https://gngsn.tistory.com/128 -->
+<html lang="ko" data-phocus-theme="dark"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <script src="./Docker Engine, 제대로 이해하기 (1)_files/f(7).txt"></script><script src="./Docker Engine, 제대로 이해하기 (1)_files/f(8).txt"></script><script type="text/javascript">if (!window.T) { window.T = {} }
+window.T.config = {"TOP_SSL_URL":"https://www.tistory.com","PREVIEW":false,"ROLE":"guest","PREV_PAGE":"","NEXT_PAGE":"","BLOG":{"id":3172059,"name":"gngsn","title":"ENFJ.dev","isDormancy":false,"nickName":"gngsn","status":"open","profileStatus":"normal"},"NEED_COMMENT_LOGIN":false,"COMMENT_LOGIN_CONFIRM_MESSAGE":"","LOGIN_URL":"https://www.tistory.com/auth/login/?redirectUrl=https://gngsn.tistory.com/128","DEFAULT_URL":"https://gngsn.tistory.com","USER":{"name":null,"homepage":null,"id":0,"profileImage":null},"SUBSCRIPTION":{"status":"none","isConnected":false,"isPending":false,"isWait":false,"isProcessing":false,"isNone":true},"IS_LOGIN":false,"HAS_BLOG":false,"IS_SUPPORT":false,"IS_SCRAPABLE":false,"TOP_URL":"http://www.tistory.com","JOIN_URL":"https://www.tistory.com/member/join","PHASE":"prod","ROLE_GROUP":"visitor"};
+window.T.entryInfo = {"entryId":128,"isAuthor":false,"categoryId":1192265,"categoryLabel":"BACKEND/Docker & Kubernetes"};
+window.appInfo = {"domain":"tistory.com","topUrl":"https://www.tistory.com","loginUrl":"https://www.tistory.com/auth/login","logoutUrl":"https://www.tistory.com/auth/logout"};
+window.initData = {};
+
+window.TistoryBlog = {
+    basePath: "",
+    url: "https://gngsn.tistory.com",
+    tistoryUrl: "https://gngsn.tistory.com",
+    manageUrl: "https://gngsn.tistory.com/manage",
+    token: "+gWRNODSEiQxVXvDLw9A8eDX8mK4gsfmPzriF3hOKZL4+Vy0CiKmJbfc3zc3taHy"
+};
+var servicePath = "";
+var blogURL = "";</script>
+
+                
+                
+                
+                        <!-- BusinessLicenseInfo - START -->
+        
+            <link href="./Docker Engine, 제대로 이해하기 (1)_files/style.css" rel="stylesheet" type="text/css">
+
+            <script>function switchFold(entryId) {
+    var businessLayer = document.getElementById("businessInfoLayer_" + entryId);
+
+    if (businessLayer) {
+        if (businessLayer.className.indexOf("unfold_license") > 0) {
+            businessLayer.className = "business_license_layer";
+        } else {
+            businessLayer.className = "business_license_layer unfold_license";
+        }
+    }
+}
+</script>
+
+        
+        <!-- BusinessLicenseInfo - END -->
+        <!-- DaumShow - START -->
+        <style type="text/css">#daumSearchBox {
+    height: 21px;
+    background-image: url(//i1.daumcdn.net/imgsrc.search/search_all/show/tistory/plugin/bg_search2_2.gif);
+    margin: 5px auto;
+    padding: 0;
+}
+
+#daumSearchBox input {
+    background: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+#daumSearchBox #daumLogo {
+    width: 34px;
+    height: 21px;
+    float: left;
+    margin-right: 5px;
+    background-image: url(//i1.daumcdn.net/img-media/tistory/img/bg_search1_2_2010ci.gif);
+}
+
+#daumSearchBox #show_q {
+    background-color: transparent;
+    border: none;
+    font: 12px Gulim, Sans-serif;
+    color: #555;
+    margin-top: 4px;
+    margin-right: 15px;
+    float: left;
+}
+
+#daumSearchBox #show_btn {
+    background-image: url(//i1.daumcdn.net/imgsrc.search/search_all/show/tistory/plugin/bt_search_2.gif);
+    width: 37px;
+    height: 21px;
+    float: left;
+    margin: 0;
+    cursor: pointer;
+    text-indent: -1000em;
+}
+</style>
+
+        <!-- DaumShow - END -->
+
+        <!-- MetaTag - START -->
+        <meta name="image" content="https://tistory1.daumcdn.net/tistory/3172059/attach/3e56f2f1e68c446d96086aa70aa9d34f">
+<meta property="image" content="https://tistory1.daumcdn.net/tistory/3172059/attach/3e56f2f1e68c446d96086aa70aa9d34f">
+        <!-- MetaTag - END -->
+
+<!-- System - START -->
+
+<!-- System - END -->
+
+        <!-- GoogleSearchConsole - START -->
+        
+<!-- BEGIN GOOGLE_SITE_VERIFICATION -->
+<meta name="google-site-verification" content="qYVwP-Yv4uvbw5bDjipYnynF0hAC_MMe7jdqPEqzCn4">
+<!-- END GOOGLE_SITE_VERIFICATION -->
+
+        <!-- GoogleSearchConsole - END -->
+
+        <!-- TistoryProfileLayer - START -->
+        <link href="./Docker Engine, 제대로 이해하기 (1)_files/style(1).css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./Docker Engine, 제대로 이해하기 (1)_files/script.js"></script>
+
+        <!-- TistoryProfileLayer - END -->
+
+                
+                <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="format-detection" content="telephone=no">
+<script src="./Docker Engine, 제대로 이해하기 (1)_files/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="./Docker Engine, 제대로 이해하기 (1)_files/tiara.min.js"></script><meta name="referrer" content="always">
+<meta name="google-adsense-platform-account" content="ca-host-pub-9691043933427338">
+<meta name="google-adsense-platform-domain" content="tistory.com">
+<meta name="google-adsense-account" content="ca-pub-4553219130656487">
+<meta name="description" content="📌  Docker Series&gt; Docker Engine, 제대로 이해하기 (1) - docker engine deep diveDocker Engine, 제대로 이해하기 (2) - namespace, cgroupDocker Network, 제대로 이해하기 (1) - libnetworkDocker Network, 제대로 이해하기 (2) - bridge, host, none driversDocker, 제대로 사용하기 - Commands안녕하세요. 오늘은 Docker Engine에 대해 깊게 다루려고 합니다. 이 포스팅의 목적은 dockerEngine의 내부 구조와 동작원리 등을 최대한 자세히 다루는데 있습니다.이 글을 읽는 독자가 Docker image, container 등 기본적인 개념을 이해한다는 가..">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://gngsn.tistory.com/128">
+<meta property="og.article.author" content="gngsn">
+<meta property="og:site_name" content="ENFJ.dev">
+<meta property="og:title" content="Docker Engine, 제대로 이해하기 (1)">
+<meta name="by" content="gngsn">
+<meta property="og:description" content="📌  Docker Series&gt; Docker Engine, 제대로 이해하기 (1) - docker engine deep diveDocker Engine, 제대로 이해하기 (2) - namespace, cgroupDocker Network, 제대로 이해하기 (1) - libnetworkDocker Network, 제대로 이해하기 (2) - bridge, host, none driversDocker, 제대로 사용하기 - Commands안녕하세요. 오늘은 Docker Engine에 대해 깊게 다루려고 합니다. 이 포스팅의 목적은 dockerEngine의 내부 구조와 동작원리 등을 최대한 자세히 다루는데 있습니다.이 글을 읽는 독자가 Docker image, container 등 기본적인 개념을 이해한다는 가..">
+<meta property="og:image" content="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FnLBTy%2FbtseH0SSSyQ%2FAAAAAAAAAAAAAAAAAAAAANtjkZRL_az_eeCQHhO2E1u2vkAAVRuuPfNihV7UYeBO%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DKFuV3y6ZqxWTxOdNwKaN5zq6wvo%253D">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@TISTORY">
+<meta name="twitter:title" content="Docker Engine, 제대로 이해하기 (1)">
+<meta name="twitter:description" content="📌  Docker Series&gt; Docker Engine, 제대로 이해하기 (1) - docker engine deep diveDocker Engine, 제대로 이해하기 (2) - namespace, cgroupDocker Network, 제대로 이해하기 (1) - libnetworkDocker Network, 제대로 이해하기 (2) - bridge, host, none driversDocker, 제대로 사용하기 - Commands안녕하세요. 오늘은 Docker Engine에 대해 깊게 다루려고 합니다. 이 포스팅의 목적은 dockerEngine의 내부 구조와 동작원리 등을 최대한 자세히 다루는데 있습니다.이 글을 읽는 독자가 Docker image, container 등 기본적인 개념을 이해한다는 가..">
+<meta property="twitter:image" content="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FnLBTy%2FbtseH0SSSyQ%2FAAAAAAAAAAAAAAAAAAAAANtjkZRL_az_eeCQHhO2E1u2vkAAVRuuPfNihV7UYeBO%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DKFuV3y6ZqxWTxOdNwKaN5zq6wvo%253D">
+<meta content="https://gngsn.tistory.com/128" property="dg:plink">
+<meta name="plink">
+<meta name="title" content="Docker Engine, 제대로 이해하기 (1)">
+<meta name="article:media_name" content="ENFJ.dev">
+<meta property="article:mobile_url" content="https://gngsn.tistory.com/m/128">
+<meta property="article:pc_url" content="https://gngsn.tistory.com/128">
+<meta property="article:mobile_view_url" content="https://gngsn.tistory.com/m/128">
+<meta property="article:pc_view_url" content="https://gngsn.tistory.com/128">
+<meta property="article:talk_channel_view_url" content="https://gngsn.tistory.com/m/128">
+<meta property="article:pc_service_home" content="https://www.tistory.com">
+<meta property="article:mobile_service_home" content="https://www.tistory.com/m">
+<meta property="article:txid" content="3172059_128">
+<meta property="article:published_time" content="2022-01-16T13:01:25+09:00">
+<meta property="og:regDate" content="20220116010125">
+<meta property="article:modified_time" content="2024-06-24T22:10:29+09:00">
+<script type="module" src="./Docker Engine, 제대로 이해하기 (1)_files/index.js" defer=""></script>
+<script type="text/javascript" src="./Docker Engine, 제대로 이해하기 (1)_files/index-legacy.js" defer="" nomodule="true"></script>
+<script type="text/javascript" src="./Docker Engine, 제대로 이해하기 (1)_files/polyfills-legacy.js" defer="" nomodule="true"></script>
+<link rel="icon" sizes="any" href="https://t1.daumcdn.net/tistory_admin/favicon/tistory_favicon_32x32.ico">
+<link rel="icon" type="image/svg+xml" href="https://t1.daumcdn.net/tistory_admin/top_v2/bi-tistory-favicon.svg">
+<link rel="apple-touch-icon" href="https://t1.daumcdn.net/tistory_admin/top_v2/tistory-apple-touch-favicon.png">
+<link rel="stylesheet" type="text/css" href="./Docker Engine, 제대로 이해하기 (1)_files/font.css">
+<link rel="stylesheet" type="text/css" href="./Docker Engine, 제대로 이해하기 (1)_files/content.css">
+<link rel="stylesheet" type="text/css" href="./Docker Engine, 제대로 이해하기 (1)_files/index.css">
+<link rel="stylesheet" type="text/css" href="./Docker Engine, 제대로 이해하기 (1)_files/uselessPMargin.css">
+<script type="text/javascript">(function() {
+    var tjQuery = jQuery.noConflict(true);
+    window.tjQuery = tjQuery;
+    window.orgjQuery = window.jQuery; window.jQuery = tjQuery;
+    window.jQuery = window.orgjQuery; delete window.orgjQuery;
+})()</script>
+<script type="text/javascript" src="./Docker Engine, 제대로 이해하기 (1)_files/base.js"></script>
+<script type="text/javascript" src="./Docker Engine, 제대로 이해하기 (1)_files/kakao.min.js"></script>
+
+                
+  <title>Docker Engine, 제대로 이해하기 (1)</title>
+  <meta name="title" content="Docker Engine, 제대로 이해하기 (1) :: ENFJ.dev">
+  <meta name="description" content="">
+  <meta name="image" content="https://tistory1.daumcdn.net/tistory/3172059/skin/images/gyeongseon.png">
+  
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <link rel="alternate" type="application/rss+xml" title="ENFJ.dev" href="https://gngsn.tistory.com/rss">
+  <link rel="shortcut icon" href="https://gngsn.tistory.com/favicon.ico">
+  <link rel="stylesheet" href="./Docker Engine, 제대로 이해하기 (1)_files/AvenirLTStd.css">
+  <link rel="stylesheet" href="./Docker Engine, 제대로 이해하기 (1)_files/SpoqaHanSans.css">
+  <link rel="stylesheet" href="./Docker Engine, 제대로 이해하기 (1)_files/icomoon.css">
+  <link rel="stylesheet" href="./Docker Engine, 제대로 이해하기 (1)_files/style(2).css">
+  <link rel="stylesheet" href="./Docker Engine, 제대로 이해하기 (1)_files/slick.css">
+	<link rel="stylesheet" href="./Docker Engine, 제대로 이해하기 (1)_files/toc.css">
+  <script src="./Docker Engine, 제대로 이해하기 (1)_files/jquery.js"></script>
+  <script src="./Docker Engine, 제대로 이해하기 (1)_files/slick.js"></script>
+  <script src="./Docker Engine, 제대로 이해하기 (1)_files/common.js"></script>
+  <script src="./Docker Engine, 제대로 이해하기 (1)_files/vh-check.min.js"></script>
+  <script async="" src="./Docker Engine, 제대로 이해하기 (1)_files/f(9).txt" crossorigin="anonymous" data-checked-head="true"></script>
+  <link rel="stylesheet" href="./Docker Engine, 제대로 이해하기 (1)_files/atom-one-light.min.css">
+  <script src="./Docker Engine, 제대로 이해하기 (1)_files/highlight.min.js"></script>
+
+  <script>hljs.initHighlightingOnLoad();</script>
+
+                
+                
+                <style type="text/css">.another_category {
+    border: 1px solid #E5E5E5;
+    padding: 10px 10px 5px;
+    margin: 10px 0;
+    clear: both;
+}
+
+.another_category h4 {
+    font-size: 12px !important;
+    margin: 0 !important;
+    border-bottom: 1px solid #E5E5E5 !important;
+    padding: 2px 0 6px !important;
+}
+
+.another_category h4 a {
+    font-weight: bold !important;
+}
+
+.another_category table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100% !important;
+    margin-top: 10px !important;
+}
+
+* html .another_category table {
+    width: auto !important;
+}
+
+*:first-child + html .another_category table {
+    width: auto !important;
+}
+
+.another_category th, .another_category td {
+    padding: 0 0 4px !important;
+}
+
+.another_category th {
+    text-align: left;
+    font-size: 12px !important;
+    font-weight: normal;
+    word-break: break-all;
+    overflow: hidden;
+    line-height: 1.5;
+}
+
+.another_category td {
+    text-align: right;
+    width: 80px;
+    font-size: 11px;
+}
+
+.another_category th a {
+    font-weight: normal;
+    text-decoration: none;
+    border: none !important;
+}
+
+.another_category th a.current {
+    font-weight: bold;
+    text-decoration: none !important;
+    border-bottom: 1px solid !important;
+}
+
+.another_category th span {
+    font-weight: normal;
+    text-decoration: none;
+    font: 10px Tahoma, Sans-serif;
+    border: none !important;
+}
+
+.another_category_color_gray, .another_category_color_gray h4 {
+    border-color: #E5E5E5 !important;
+}
+
+.another_category_color_gray * {
+    color: #909090 !important;
+}
+
+.another_category_color_gray th a.current {
+    border-color: #909090 !important;
+}
+
+.another_category_color_gray h4, .another_category_color_gray h4 a {
+    color: #737373 !important;
+}
+
+.another_category_color_red, .another_category_color_red h4 {
+    border-color: #F6D4D3 !important;
+}
+
+.another_category_color_red * {
+    color: #E86869 !important;
+}
+
+.another_category_color_red th a.current {
+    border-color: #E86869 !important;
+}
+
+.another_category_color_red h4, .another_category_color_red h4 a {
+    color: #ED0908 !important;
+}
+
+.another_category_color_green, .another_category_color_green h4 {
+    border-color: #CCE7C8 !important;
+}
+
+.another_category_color_green * {
+    color: #64C05B !important;
+}
+
+.another_category_color_green th a.current {
+    border-color: #64C05B !important;
+}
+
+.another_category_color_green h4, .another_category_color_green h4 a {
+    color: #3EA731 !important;
+}
+
+.another_category_color_blue, .another_category_color_blue h4 {
+    border-color: #C8DAF2 !important;
+}
+
+.another_category_color_blue * {
+    color: #477FD6 !important;
+}
+
+.another_category_color_blue th a.current {
+    border-color: #477FD6 !important;
+}
+
+.another_category_color_blue h4, .another_category_color_blue h4 a {
+    color: #1960CA !important;
+}
+
+.another_category_color_violet, .another_category_color_violet h4 {
+    border-color: #E1CEEC !important;
+}
+
+.another_category_color_violet * {
+    color: #9D64C5 !important;
+}
+
+.another_category_color_violet th a.current {
+    border-color: #9D64C5 !important;
+}
+
+.another_category_color_violet h4, .another_category_color_violet h4 a {
+    color: #7E2CB5 !important;
+}
+</style>
+
+                
+                <link rel="stylesheet" type="text/css" href="./Docker Engine, 제대로 이해하기 (1)_files/revenue.css">
+<link rel="canonical" href="https://gngsn.tistory.com/128">
+
+<!-- BEGIN STRUCTURED_DATA -->
+<script type="application/ld+json">
+    {"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@id":"https://gngsn.tistory.com/128","name":null},"url":"https://gngsn.tistory.com/128","headline":"Docker Engine, 제대로 이해하기 (1)","description":"📌&nbsp; Docker Series&gt; Docker Engine, 제대로 이해하기 (1) - docker engine&nbsp;deep diveDocker Engine, 제대로 이해하기 (2) -&nbsp;namespace, cgroupDocker Network, 제대로 이해하기 (1) - libnetworkDocker Network, 제대로 이해하기 (2) - bridge, host, none driversDocker, 제대로 사용하기 - Commands안녕하세요. 오늘은 Docker Engine에 대해 깊게 다루려고 합니다.&nbsp;이 포스팅의 목적은 dockerEngine의 내부 구조와 동작원리 등을 최대한 자세히 다루는데 있습니다.이 글을 읽는 독자가 Docker image, container 등 기본적인 개념을 이해한다는 가..","author":{"@type":"Person","name":"gngsn","logo":null},"image":{"@type":"ImageObject","url":"https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FnLBTy%2FbtseH0SSSyQ%2FAAAAAAAAAAAAAAAAAAAAANtjkZRL_az_eeCQHhO2E1u2vkAAVRuuPfNihV7UYeBO%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DKFuV3y6ZqxWTxOdNwKaN5zq6wvo%253D","width":"800px","height":"800px"},"datePublished":"2022-01-16T13:01:25+09:00","dateModified":"2024-06-24T22:10:29+09:00","publisher":{"@type":"Organization","name":"TISTORY","logo":{"@type":"ImageObject","url":"https://t1.daumcdn.net/tistory_admin/static/images/openGraph/opengraph.png","width":"800px","height":"800px"}}}
+</script>
+<!-- END STRUCTURED_DATA -->
+<link rel="stylesheet" type="text/css" href="./Docker Engine, 제대로 이해하기 (1)_files/dialog.css">
+<link rel="stylesheet" type="text/css" href="./Docker Engine, 제대로 이해하기 (1)_files/font(1).css">
+<link rel="stylesheet" type="text/css" href="./Docker Engine, 제대로 이해하기 (1)_files/postBtn.css">
+<link rel="stylesheet" type="text/css" href="./Docker Engine, 제대로 이해하기 (1)_files/tistory.css">
+<script type="text/javascript" src="./Docker Engine, 제대로 이해하기 (1)_files/common(1).js"></script>
+
+                
+                <style type="text/css">#DragSchLayer{display:block;position:absolute;z-index:1000;width:61px;height:31px;margin:-30px 0px 0px -5px;background:url(//search1.daumcdn.net/search/statics/common/pi/btn_drag_rect.png);cursor:pointer}             @media             only screen and (-webkit-min-device-pixel-ratio: 1.5),             only screen and (min-device-pixel-ratio: 1.5),             only screen and (min-resolution: 1.5dppx) {             #DragSchLayer{background-image:url(//search1.daumcdn.net/search/statics/common/pi/r2/btn_drag_rect.png);background-size:61px 31px}}            </style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><script async="" src="./Docker Engine, 제대로 이해하기 (1)_files/ca-pub-4553219130656487"></script><script async="" src="./Docker Engine, 제대로 이해하기 (1)_files/AGSKWxUPO6uvGUpB7qeDAiYgVmgOqrdBJrddKfsyEfbyqhPdgy66QHivEPDAOGvGN53c-K6Tq4W62MCvX4ixEWZrlZT2RJ7wLf1867s93WuZ4Mt-yhYGLaz3LmowaAHY7_nmfifM8pPU2w=="></script><script async="" src="./Docker Engine, 제대로 이해하기 (1)_files/AGSKWxViGWdSZX8-7Jfz2B6j0cmV7PjjeHsnp4JiVPT_PxhtdJZQzQMhFuYCVoJscTsosLv3-LTDPMn45T0HpzBFov3CvWRKuBXLtMU36Qpff4f2DV5ZHzxvLonQhQhqwaSOgj4bCEgEeQ=="></script><script async="" src="./Docker Engine, 제대로 이해하기 (1)_files/AGSKWxWqIrmoGjbm9m49SoaCb51mKShvEvPllc1AhRQ8A11nKtGi3OCb3t1JXivoYAJIDnynpYuW-RaGzHRXD0rAp4tQMh4mQ35XQbyzEZ_Bswz12IECIXlNp2dz67uBgB3HIWVumkSMBA=="></script></head>
+
+                                                <body id="tt-body-page" class="theme_blue" aria-hidden="false" style=""><div id="MathJax_Message" style="display: none;"></div><span class="prognroll-bar" style="position: fixed; top: 0px; left: 0px; width: 42.1019%; height: 5px; background-color: rgba(26, 26, 26, 0.71); z-index: 2147483647;"></span>
+                
+                
+                
+  
+    <!-- warp / 테마 변경시 theme_pink / theme_blue / theme_green / theme_gray-->
+    <div id="wrap" class="white">
+
+      <!-- box_header -->
+      <header class="box_header">
+        <h1 class="title_logo">
+          <a href="https://gngsn.tistory.com/" title="ENFJ.dev" class="link_logo">
+            
+              ENFJ.dev
+            <!-- <img src="" class="img_logo" alt=""> -->
+            
+            
+          </a>
+        </h1>
+
+        <!-- <h1 class="title_logo" style="background-image:url('https://tistory1.daumcdn.net/tistory/3172059/skin/images/logo.jpg')"></h1> -->
+        <button class="btn_search"></button>
+
+        <!-- 메뉴 및 검색 버튼 클릭시 area_sidebar / area_popup 논처리 삭제 / body 에 style="overflow:hidden" 추가 -->
+        <button type="button" class="btn_menu" title="메뉴"><span class="blind">메뉴</span></button>
+      </header>
+      <!-- // box_header -->
+
+      <!-- container -->
+      <div id="container">
+
+        <!-- area_sidebar -->
+        <aside class="area_sidebar thema_apply" style="display: none;">
+
+          <div class="inner_sidebar">
+            <div class="sidebar_header">
+              <h1 class="title_logo">
+                <a href="https://gngsn.tistory.com/" title="ENFJ.dev" class="link_logo">
+                  
+                    ENFJ.dev
+                    <!-- <img src="" class="img_logo" alt=""> -->
+                  
+                  
+                </a>
+              </h1>
+              <button type="button" class="btn_close" title="닫기"><span class="icon-Close"></span></button>
+            </div>
+
+            <div class="sidebar_contents">
+              <div class="sidebar_menu">
+                            <div class="revenue_unit_wrap">
+  <div class="revenue_unit_item adsense responsive">
+    <div class="revenue_unit_info">반응형</div>
+    <script src="./Docker Engine, 제대로 이해하기 (1)_files/f(10).txt" async="async"></script>
+    <ins class="adsbygoogle" style="display: block;" data-ad-host="ca-host-pub-9691043933427338" data-ad-client="ca-pub-4553219130656487" data-ad-format="auto" data-adsbygoogle-status="done"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+                    <div class="sidebar_left">
+                      <!-- 카테고리 메뉴 -->
+                      <div class="box_gnb">
+                        <nav>
+                          <ul class="tt_category"><li class=""><a href="https://gngsn.tistory.com/category" class="link_tit"> 분류 전체보기 <span class="c_cnt">(267)</span> </a>
+  <ul class="category_list"><li class=""><a href="https://gngsn.tistory.com/category/Spring" class="link_item"> Spring <span class="c_cnt">(56)</span> </a>
+  <ul class="sub_category_list"><li class=""><a href="https://gngsn.tistory.com/category/Spring/Java" class="link_sub_item"> Java <span class="c_cnt">(13)</span> </a></li>
+<li class=""><a href="https://gngsn.tistory.com/category/Spring/Kotlin" class="link_sub_item"> Kotlin <span class="c_cnt">(13)</span> </a></li>
+</ul>
+</li>
+<li class=""><a href="https://gngsn.tistory.com/category/BACKEND" class="link_item"> BACKEND <span class="c_cnt">(27)</span> </a>
+  <ul class="sub_category_list"><li class=""><a href="https://gngsn.tistory.com/category/BACKEND/Docker%20%26%20Kubernetes" class="link_sub_item"> Docker &amp; Kubernetes <span class="c_cnt">(22)</span> </a></li>
+<li class=""><a href="https://gngsn.tistory.com/category/BACKEND/Database" class="link_sub_item"> Database <span class="c_cnt">(23)</span> </a></li>
+<li class=""><a href="https://gngsn.tistory.com/category/BACKEND/Node" class="link_sub_item"> Node <span class="c_cnt">(15)</span> </a></li>
+<li class=""><a href="https://gngsn.tistory.com/category/BACKEND/Linux" class="link_sub_item"> Linux <span class="c_cnt">(7)</span> </a></li>
+<li class=""><a href="https://gngsn.tistory.com/category/BACKEND/AWS" class="link_sub_item"> AWS <span class="c_cnt">(17)</span> </a></li>
+<li class=""><a href="https://gngsn.tistory.com/category/BACKEND/Security" class="link_sub_item"> Security <span class="c_cnt">(3)</span> </a></li>
+</ul>
+</li>
+<li class=""><a href="https://gngsn.tistory.com/category/ETC" class="link_item"> ETC <span class="c_cnt">(80)</span> </a>
+  <ul class="sub_category_list"><li class=""><a href="https://gngsn.tistory.com/category/ETC/Software%20Engineering" class="link_sub_item"> Software Engineering <span class="c_cnt">(9)</span> </a></li>
+<li class=""><a href="https://gngsn.tistory.com/category/ETC/Design%20Patterns" class="link_sub_item"> Design Patterns <span class="c_cnt">(24)</span> </a></li>
+<li class=""><a href="https://gngsn.tistory.com/category/ETC/Retrospect" class="link_sub_item"> Retrospect <span class="c_cnt">(8)</span> </a></li>
+<li class=""><a href="https://gngsn.tistory.com/category/ETC/Algorithm" class="link_sub_item"> Algorithm <span class="c_cnt">(25)</span> </a></li>
+<li class=""><a href="https://gngsn.tistory.com/category/ETC/ML%20%26%20DL" class="link_sub_item"> ML &amp; DL <span class="c_cnt">(7)</span> </a></li>
+<li class=""><a href="https://gngsn.tistory.com/category/ETC/GIT" class="link_sub_item"> GIT <span class="c_cnt">(5)</span> </a></li>
+</ul>
+</li>
+<li class=""><a href="https://gngsn.tistory.com/category/Hacks" class="link_item"> Hacks <span class="c_cnt">(1)</span> </a></li>
+<li class=""><a href="https://gngsn.tistory.com/category/Books" class="link_item"> Books <span class="c_cnt">(14)</span> </a></li>
+</ul>
+</li>
+</ul>
+
+                        </nav>
+                      </div>
+                  
+                    <!-- 메인 메뉴 -->
+                    <div class="box_gnb">
+                      <ul>
+  <li class="t_menu_link_1 first"><a href="https://github.com/gngsn" target="_black">Github</a></li>
+  <li class="t_menu_link_2"><a href="http://kyeongsun.com/" target="_black">PORTFOLIO</a></li>
+  <li class="t_menu_guestbook last"><a href="https://gngsn.tistory.com/guestbook" target="">방명록</a></li>
+</ul>
+                    </div>
+              </div>
+              
+                <div class="sidebar_right">
+                  <!-- 링크 -->
+                  <div class="box_sns">
+                    <ul class="list_sns">
+                      
+                    </ul>
+                  </div>
+              
+                <!-- RSS 피드 -->
+                <div class="add_link">
+                  <a href="https://gngsn.tistory.com/rss" target="_blank" class="link_add">RSS 피드</a>
+                </div>
+            </div>
+            
+          </div>
+
+          <!-- 관리 -->
+          <div class="box_tool">
+            <div class="btn-for-guest" style="display: block;">
+              <a href="https://gngsn.tistory.com/128#" class="link_tool" data-action="login">로그인</a>
+            </div>
+            <div class="btn-for-user">
+              <a href="https://gngsn.tistory.com/128#" class="link_tool" data-action="logout">로그아웃</a>
+              <a href="https://gngsn.tistory.com/manage/entry/post" class="link_tool">글쓰기</a>
+              <a href="https://gngsn.tistory.com/manage" class="link_tool">관리</a>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="dimmed_sidebar"></div>
+    </aside>
+
+    <!-- // area_sidebar -->
+
+    <!-- area_popup -->
+    <div class="area_popup" style="display: none;">
+      <div class="area_search thema_apply">
+        <div class="search_header">
+          <h1 class="title_logo">
+            <a href="https://gngsn.tistory.com/" title="ENFJ.dev" class="link_logo">
+              
+                <img src="./Docker Engine, 제대로 이해하기 (1)_files/7391b61c3bc747a9b8cb407910f06699" class="img_logo" alt="ENFJ.dev">
+              
+              
+            </a>
+          </h1>
+          <button type="button" class="btn_close" title="닫기"><span class="icon-Close"></span></button>
+        </div>
+
+        <div class="search_content">
+          <form action="https://gngsn.tistory.com/128" method="get">
+            <legend><span class="blind">컨텐츠 검색</span></legend>
+            <div class="box_form">
+              <span class="icon-Search"></span>
+              
+                <input type="text" name="search" title="검색어 입력" placeholder="SEARCH" value="" class="inp_search" onkeypress="if (event.keyCode == 13) { try {
+    window.location.href = &#39;/search&#39; + &#39;/&#39; + looseURIEncode(document.getElementsByName(&#39;search&#39;)[0].value);
+    document.getElementsByName(&#39;search&#39;)[0].value = &#39;&#39;;
+    return false;
+} catch (e) {} }">
+              
+              <button type="button" title="검색어 삭제" class="btn_search_del">
+                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 36 36" class="img_svg">
+                  <defs>
+                    <path id="textDelBtnSvg" d="M20 2C10.059 2 2 10.059 2 20s8.059 18 18 18 18-8.059 18-18S29.941 2 20 2zm8 24.6L26.6 28 20 21.4 13.4 28 12 26.6l6.6-6.6-6.6-6.6 1.4-1.4 6.6 6.6 6.6-6.6 1.4 1.4-6.6 6.6 6.6 6.6z"></path>
+                  </defs>
+                  <g fill="none" fill-rule="evenodd" transform="translate(-2 -2)">
+                    <path d="M0 0h40v40H0z"></path>
+                    <mask id="textDelBtnSvgMask" fill="#fff">
+                      <use xlink:href="#textDelBtnSvg"></use>
+                    </mask>
+                    <g fill="#000" fill-opacity="1" mask="url(#textDelBtnSvgMask)" class="svg_bg">
+                      <path d="M0 0h40v40H0z"></path>
+                    </g>
+                  </g>
+                </svg>
+              </button>
+            </div>
+          </form>
+
+          
+              <!-- 태그 -->
+              <div class="tag_zone">
+                <h3 class="title_sidebar">태그</h3>
+                <div class="box_tag">
+                  <a href="https://gngsn.tistory.com/tag/git" class="cloud4"> git</a><a href="https://gngsn.tistory.com/tag/AWS" class="cloud3"> AWS</a><a href="https://gngsn.tistory.com/tag/Design%20Patterns" class="cloud1"> Design Patterns</a><a href="https://gngsn.tistory.com/tag/Spring" class="cloud2"> Spring</a><a href="https://gngsn.tistory.com/tag/java" class="cloud4"> java</a><a href="https://gngsn.tistory.com/tag/Spring%20Batch" class="cloud4"> Spring Batch</a><a href="https://gngsn.tistory.com/tag/authentication" class="cloud4"> authentication</a><a href="https://gngsn.tistory.com/tag/SQL" class="cloud4"> SQL</a><a href="https://gngsn.tistory.com/tag/google" class="cloud4"> google</a><a href="https://gngsn.tistory.com/tag/MYSQL" class="cloud3"> MYSQL</a><a href="https://gngsn.tistory.com/tag/github" class="cloud4"> github</a><a href="https://gngsn.tistory.com/tag/Software%20Engineering" class="cloud4"> Software Engineering</a><a href="https://gngsn.tistory.com/tag/tutorial" class="cloud4"> tutorial</a><a href="https://gngsn.tistory.com/tag/linux" class="cloud4"> linux</a><a href="https://gngsn.tistory.com/tag/select" class="cloud4"> select</a><a href="https://gngsn.tistory.com/tag/Postman" class="cloud3"> Postman</a><a href="https://gngsn.tistory.com/tag/Algorithm" class="cloud4"> Algorithm</a><a href="https://gngsn.tistory.com/tag/dfs" class="cloud4"> dfs</a><a href="https://gngsn.tistory.com/tag/node" class="cloud4"> node</a><a href="https://gngsn.tistory.com/tag/Express" class="cloud3"> Express</a>
+                </div>
+              </div>
+            
+              <!-- 최근글 -->
+              <div class="tag_board">
+                <h3 class="title_sidebar">최근글</h3>
+                <ul class="list_sidebar">
+                  
+                    <li class="item_sidebar"><a href="https://gngsn.tistory.com/302"> 2025년 상반기 회고</a></li>
+                  
+                    <li class="item_sidebar"><a href="https://gngsn.tistory.com/301"> 프레임</a></li>
+                  
+                    <li class="item_sidebar"><a href="https://gngsn.tistory.com/300"> 고전이 답했다, 마땅히 살아야 할 삶에 대하여.</a></li>
+                  
+                    <li class="item_sidebar"><a href="https://gngsn.tistory.com/299"> 2024년 회고</a></li>
+                  
+                </ul>
+              </div>
+            
+              <!-- 글 보관함 -->
+              <div class="tag_board">
+                <h3 class="title_sidebar">아카이브</h3>
+                <ul class="list_sidebar">
+                  
+                    <li class="item_sidebar"><a href="https://gngsn.tistory.com/archive/202506">2025/06</a></li>
+                  
+                    <li class="item_sidebar"><a href="https://gngsn.tistory.com/archive/202502">2025/02</a></li>
+                  
+                </ul>
+              </div>
+            
+        </div>
+
+      </div>
+    </div>
+    <!-- // area_popup -->
+
+    <main id="main">
+			<div id="toc-btn" class="toc-btn"> 
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 500 500" style="enable-background:new 0 0 600.929 600.929;" xml:space="preserve">
+          <g>
+            <path d="M165.304,142.468L277.517,30.267c1.902-1.903,2.847-4.093,2.847-6.567c0-2.475-0.951-4.665-2.847-6.567L263.239,2.857
+                C261.337,0.955,259.146,0,256.676,0c-2.478,0-4.665,0.955-6.571,2.857L117.057,135.9c-1.903,1.903-2.853,4.093-2.853,6.567
+                c0,2.475,0.95,4.664,2.853,6.567l133.048,133.043c1.903,1.906,4.086,2.851,6.564,2.851c2.478,0,4.66-0.947,6.563-2.851
+                l14.277-14.267c1.902-1.903,2.851-4.094,2.851-6.57c0-2.472-0.948-4.661-2.851-6.564L165.304,142.468z"></path>
+            <path d="M55.668,142.468L167.87,30.267c1.903-1.903,2.851-4.093,2.851-6.567c0-2.475-0.947-4.665-2.851-6.567L153.6,2.857
+                C151.697,0.955,149.507,0,147.036,0c-2.478,0-4.668,0.955-6.57,2.857L7.417,135.9c-1.903,1.903-2.853,4.093-2.853,6.567
+                c0,2.475,0.95,4.664,2.853,6.567l133.048,133.043c1.902,1.906,4.09,2.851,6.57,2.851c2.471,0,4.661-0.947,6.563-2.851
+                l14.271-14.267c1.903-1.903,2.851-4.094,2.851-6.57c0-2.472-0.947-4.661-2.851-6.564L55.668,142.468z"></path>
+          </g>
+        </svg>
+      </div>
+      <div id="toc-elements" class="toc-elements display toc-app-common items toc-app-basic">
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px" viewBox="0 0 1200 1200" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
+          <g>
+            <path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717
+             L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859
+             c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287
+             l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285
+             L284.286,256.002z"></path>
+          </g>
+        </svg>
+      <a id="toc-0" class="toc-common toc-level-1">⛱&nbsp; History</a><a id="toc-1" class="toc-common toc-level-2">✔️&nbsp; Background</a><a id="toc-2" class="toc-common toc-level-2">✔️&nbsp; 초기 Docker Engine</a><a id="toc-3" class="toc-common toc-level-2">✔️&nbsp; docker daemon</a><a id="toc-4" class="toc-common toc-level-2">✔️&nbsp;&nbsp;LXC</a><a id="toc-5" class="toc-common toc-level-1 toc-parent-active">⚙️&nbsp; Docker Engine</a><a id="toc-6" class="toc-common toc-level-2 toc-active">✔️&nbsp; big picture</a><a id="toc-7" class="toc-common toc-level-2">✔️&nbsp;&nbsp;docker client</a><a id="toc-8" class="toc-common toc-level-2">✔️&nbsp;&nbsp;dockerd</a><a id="toc-9" class="toc-common toc-level-2">✔️&nbsp;&nbsp;containerd</a><a id="toc-10" class="toc-common toc-level-2">✔️&nbsp;&nbsp;runc</a><a id="toc-11" class="toc-common toc-level-2">✔️&nbsp;&nbsp;shim</a></div>
+      <!-- area_cover -->
+      
+      <!-- // area_cover -->
+      
+
+      <!-- area_view -->
+      <div class="area_view">
+                  
+              
+
+    
+
+      <!-- article_content -->
+      <div class="area_article">
+
+        <!-- 뷰페이지 상단 type css 구분 / type_article_header_common or type_article_header_cover -->
+        <div class="article_header type_article_header_cover">
+          <div class="inner_header" style="background-image:url(&#39;https://img1.daumcdn.net/thumb/R750x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FnLBTy%2FbtseH0SSSyQ%2FAAAAAAAAAAAAAAAAAAAAANtjkZRL_az_eeCQHhO2E1u2vkAAVRuuPfNihV7UYeBO%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DKFuV3y6ZqxWTxOdNwKaN5zq6wvo%253D&#39;)">
+            <div class="info_text">
+              <strong class="title_post">Docker Engine, 제대로 이해하기 (1)</strong>
+              <p class="info"><span class="date">2022. 1. 16. 13:01</span>ㆍ<span>BACKEND/Docker &amp; Kubernetes</span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 에디터 영역 -->
+        <div class="article_view">
+          
+            <!-- System - START -->
+
+<!-- System - END -->
+
+            <div class="tt_article_useless_p_margin contents_style"><p data-ke-size="size14"><span style="color: #000000; font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;;">📌&nbsp; Docker Series</span></p>
+<p data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">&gt; Docker Engine, 제대로 이해하기 (1) - docker engine&nbsp;deep dive</span></p>
+<p data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;;"><a href="https://gngsn.tistory.com/129"><span style="color: #006dd7;">Docker Engine, 제대로 이해하기 (2) -&nbsp;</span></a><span style="color: #006dd7;"><a style="color: #006dd7;" href="https://gngsn.tistory.com/129">namespace, cgroup</a></span></span></p>
+<p data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;; color: #006dd7;"><a style="color: #006dd7;" href="https://gngsn.tistory.com/137">Docker Network, 제대로 이해하기 (1) - libnetwork</a></span></p>
+<p data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;; color: #006dd7;"><a style="color: #006dd7;" href="https://gngsn.tistory.com/140">Docker Network, 제대로 이해하기 (2) - bridge, host, none drivers</a></span></p>
+<p data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;; color: #006dd7;"><a style="color: #006dd7;" href="https://gngsn.tistory.com/268">Docker, 제대로 사용하기 - Commands</a></span></p>
+<p data-ke-size="size16"><span style="color: #000000; font-family: &#39;Noto Sans Light&#39;;"><br><br></span></p>
+<p data-ke-size="size16"><span style="color: #000000; font-family: &#39;Noto Sans Light&#39;;">안녕하세요. 오늘은 Docker Engine에 대해 깊게 다루려고 합니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="color: #000000; font-family: &#39;Noto Sans Light&#39;;">이 포스팅의 목적은 dockerEngine의 <b>내부 구조</b>와 <b>동작원리</b> 등을 최대한 자세히 다루는데 있습니다.</span></p>
+<p data-ke-size="size16"><span style="color: #000000; font-family: &#39;Noto Sans Light&#39;;">이 글을 읽는 독자가 Docker image, container 등 기본적인 개념을 이해한다는 가정하에 작성합니다.</span></p>
+<p data-ke-size="size14">&nbsp;</p>
+<p data-ke-size="size14">&nbsp;</p>
+<p data-ke-size="size14"><span style="color: #9d9d9d; font-family: &#39;Noto Sans Light&#39;;">참고 사항으로, 포스팅은 "<span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;;"> <span style="color: #2496ed;">대주제</span>(이모지+파란글자) &gt; ✔️ 소주제 &gt; # 문단 키워드</span> " 로 분리해서 정리했습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="color: #000000; font-family: &#39;Noto Sans Light&#39;;">해당 포스팅의 모든 그림은 직접 그린 것으로, 사용시 출처 표시 부탁드립니다 🙏🏻.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p style="text-align: center;" data-ke-size="size14"><span style="color: #333333; font-family: &#39;Noto Sans Light&#39;;">-----------------&nbsp; &nbsp;&nbsp;<b>INDEX</b>&nbsp; &nbsp; &nbsp;-----------------</span></p>
+<p style="text-align: center;" data-ke-size="size14">&nbsp;</p>
+<p style="text-align: center;" data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;;">[ 1부 ]</span></p>
+<p style="text-align: center;" data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;;"><span style="color: #333333;"><b>History</b></span><b></b></span></p>
+<p style="text-align: center;" data-ke-size="size14"><span style="color: #666666; font-size: 80%; font-family: &#39;Noto Sans Light&#39;;">Background</span></p>
+<p style="text-align: center;" data-ke-size="size14"><span style="color: #666666; font-size: 80%; font-family: &#39;Noto Sans Light&#39;;">초기 Docker engine</span></p>
+<p style="text-align: center;" data-ke-size="size14"><span style="color: #666666; font-size: 80%; font-family: &#39;Noto Sans Light&#39;;">docker daemon</span></p>
+<p style="text-align: center;" data-ke-size="size14"><span style="color: #666666; font-size: 80%; font-family: &#39;Noto Sans Light&#39;;">LXC</span></p>
+<p style="text-align: center;" data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;; color: #333333;"><b><b>Docker Engine</b></b></span></p>
+<p style="text-align: center;" data-ke-size="size14"><span style="color: #666666; font-size: 80%; font-family: &#39;Noto Sans Light&#39;;">big picture</span></p>
+<p style="text-align: center;" data-ke-size="size14"><span style="color: #666666; font-size: 80%; font-family: &#39;Noto Sans Light&#39;;">docker client</span></p>
+<p style="text-align: center;" data-ke-size="size14"><span style="color: #666666; font-size: 80%; font-family: &#39;Noto Sans Light&#39;;">dockerd</span></p>
+<p style="text-align: center;" data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;; font-size: 80%; color: #666666;"><span style="color: #666666;">containerd</span></span></p>
+<p style="text-align: center;" data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;; font-size: 80%; color: #666666;"><span style="color: #666666;">runc</span></span></p>
+<p style="text-align: center;" data-ke-size="size14"><span style="color: #666666; font-size: 80%; font-family: &#39;Noto Sans Light&#39;;">shim</span></p>
+<p style="text-align: center;" data-ke-size="size14">&nbsp;</p>
+<p style="text-align: center;" data-ke-size="size14"><span style="color: #2496ed;"><a style="color: #2496ed;" href="https://gngsn.tistory.com/129" target="_blank" rel="noopener"><span style="font-family: &#39;Noto Sans Light&#39;;"><b>[ 2부 ]</b></span></a></span></p>
+<p style="text-align: center;" data-ke-size="size14"><span style="color: #333333;"><b><span style="font-family: &#39;Noto Sans Light&#39;;">Namespace</span></b></span></p>
+<p style="text-align: center;" data-ke-size="size14"><span style="color: #333333;"><b><span style="font-family: &#39;Noto Sans Light&#39;;">cgroups</span></b></span></p>
+<p style="text-align: center;" data-ke-size="size14">&nbsp;</p>
+<p style="text-align: center;" data-ke-size="size14"><span style="color: #333333; font-family: &#39;Noto Sans Light&#39;;"><b>[ Docker Network</b><b>&nbsp;]</b></span><span style="color: #333333; font-family: &#39;Noto Sans Light&#39;;"><b></b></span></p>
+<p style="text-align: center;" data-ke-size="size14"><span style="color: #2496ed;"><a style="color: #2496ed;" href="https://gngsn.tistory.com/137" target="_blank" rel="noopener">(1) deep dive</a></span></p>
+<p style="text-align: center;" data-ke-size="size14"><span style="color: #333333; font-family: &#39;Noto Sans Light&#39;;">----------------------------------------------</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<h2 data-ke-size="size26" id="h-tag-0"><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;; color: #2496ed;"><b><span style="background-color: #ffffff;">⛱&nbsp; History </span></b></span></h2>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">Docker는&nbsp;<span style="background-color: #ffffff;">컨테이너 기술을 사용하여 애플리케이션에 필요한 환경을 신속하게 구축하고 테스트 및 배포를 할 수 있게 해주는 플랫폼입니다. Docker는 왜 생겼을까요? 아주 짧게 그 탄생 과정에 대해 알아볼게요.</span></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<h3 data-ke-size="size23" id="h-tag-1"><span style="color: #000000;"><b><span style="font-family: &#39;Noto Sans Light&#39;;">✔️&nbsp;</span><span style="font-family: &#39;Noto Sans Light&#39;;"><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;;"> Background</span></span></b></span></h3>
+<h4 data-ke-size="size20"><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;; color: #000000;"><span style="background-color: #ffffff;"># VMware</span></span></h4>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">아-주 예전에는 하나의 서버 당 하나의 애플리케이션이 동작됐습니다.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">동일한 서버에서 여러 개의 애플리케이션을 운영 면에서나 보안면에서나 안전하게 실행시키는 기술이 없었죠.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">그래서 새로운 애플리케이션이 필요할 때마다 서버를 구매해야했고, </span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">무조건 성능과 규모가 좋은 것을 구매하느라 낭비가 심했습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">그러다가 '가상 머신 VM'이라는 개념이 세상에 나오게 되었고, </span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">하나의 운영체제 위의 여러 OS를 실행시켜 낭비를 크게 줄게 해주었습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">하지만, 가상머신도 결함을 갖고 있는데요.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">하나의 VM 마다 고유한 OS가 필요하기 때문에, </span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">각각 CPU, RAM 및 기타 리소스를 소비하며 보다 많은 시간과 자원을 낭비하게 됩니다.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">또한 특정 OS는 라이센스가 필요한 경우도 있습니다.&nbsp;</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<h4 data-ke-size="size20"><span style="color: #000000; font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;;"><span style="background-color: #ffffff;"># Container</span></span></h4>
+<p data-ke-size="size16"><span style="color: #000000; font-family: &#39;Noto Sans Light&#39;;"><span style="background-color: #ffffff;">위의 VM 모델의 단점들로 인해 구글과 같은 대형 회사들은 <b>컨테이너 기술</b>을 사용해왔습니다. </span></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">컨테이너 모델에서 <b>컨테이너</b>는 VM과 유사합니다.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #333333;"><span style="color: #000000;">주요 차이점은 컨테이너에 자체적인 하나의 완전한 OS</span><span style="color: #9d9d9d;">full-blown OS</span> <span style="color: #000000;">가 필요하지 않다는 점입니다.</span></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">실제로 컨테이너 모델에서는 단일 호스트의 모든 컨테이너는 호스트의 OS를 공유합니다.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">이 것은 CPU, RAM 및 스토리지와 같은 막대한 양의 시스템 리소스가 확보된다는 의미를 가집니다.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">또한 , 라이센스 비용을 절감할 수 있고 OS 패치 및 유지보수의 오버헤드를 줄여주며 VM의 문제를 해결할 수 있습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">결과적으로, VM에서 컨테이너를 사용한 후 시간이나 리소스 및 네트워크를 절감할 수 있는데요.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #333333;"><span style="color: #000000;">컨테이너는 또한 시동도 빠르고 매우 휴대성이 뛰어납니다</span><span style="color: #9d9d9d;">ultra-portable</span>.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">컨테이너 워크로드를 노트북에서 클라우드로, 혹은 베어메탈 서버로 쉽게 이동할 수 있습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+
+<p data-ke-size="size16">&nbsp;</p>
+<h3 data-ke-size="size23" id="h-tag-2"><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;; color: #000000;">✔️&nbsp; <b><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;;">초기 Docker Engine</span></b></span></h3>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">초기 Docker는 현재 모델과는 다르게<b>&nbsp;Docker Daemon</b>, <b>LXC</b> 라는 두 개의 주요 구성을 가지고 있었습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p></p><figure class="imageblock alignCenter" data-ke-mobilestyle="widthOrigin" data-filename="Group 10.png" data-origin-width="1426" data-origin-height="1239"><span data-url="https://blog.kakaocdn.net/dna/vSxbC/btrqN4iur2r/AAAAAAAAAAAAAAAAAAAAAN_fiIWUiwW3TAM_qhXvf32S5oWdexvFaWbg72kdwsjb/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1756652399&amp;allow_ip=&amp;allow_referer=&amp;signature=am%2BuY6uaUMVCfyHg9VuXhHAtlhQ%3D" data-phocus="https://blog.kakaocdn.net/dna/vSxbC/btrqN4iur2r/AAAAAAAAAAAAAAAAAAAAAN_fiIWUiwW3TAM_qhXvf32S5oWdexvFaWbg72kdwsjb/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1756652399&amp;allow_ip=&amp;allow_referer=&amp;signature=am%2BuY6uaUMVCfyHg9VuXhHAtlhQ%3D" data-alt="초기 Docker Engine model"><img src="./Docker Engine, 제대로 이해하기 (1)_files/img.png" srcset="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FvSxbC%2FbtrqN4iur2r%2FAAAAAAAAAAAAAAAAAAAAAN_fiIWUiwW3TAM_qhXvf32S5oWdexvFaWbg72kdwsjb%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3Dam%252BuY6uaUMVCfyHg9VuXhHAtlhQ%253D" onerror="this.onerror=null; this.src=&#39;//t1.daumcdn.net/tistory_admin/static/images/no-image-v1.png&#39;; this.srcset=&#39;//t1.daumcdn.net/tistory_admin/static/images/no-image-v1.png&#39;;" loading="lazy" width="335" height="291" data-filename="Group 10.png" data-origin-width="1426" data-origin-height="1239" data-phocus-index="0"></span><figcaption>초기 Docker Engine model</figcaption>
+</figure>
+<p></p>
+<p data-ke-size="size16">&nbsp;</p>
+<h3 data-ke-size="size23" id="h-tag-3"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;"><b>✔️&nbsp; <span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;;">docker daemon</span></b></span></h3>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">이 때 Dokcer Daemon은 현재의 Docker Daemon과는 달랐는데요.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #333333;"><span style="color: #000000;">The Docker daemon는&nbsp;<b>모놀리 바이너리</b></span><span style="color: #9d9d9d;">monolithic binary</span><span style="color: #000000;">이었습니다. (모듈화가 되어있지 않음)</span></span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">Docker Daemon에 Docker client, the Docker API, container runtime, image builds 등을 비롯한 많은 코드들을 담고 있었습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<h3 data-ke-size="size23" id="h-tag-4"><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;; color: #333333;"><b><span style="color: #333333;"><b>✔️&nbsp;&nbsp;</b></span>LXC</b></span></h3>
+<p data-ke-size="size16">&nbsp;</p>
+<p></p><figure class="imageblock alignCenter" data-ke-mobilestyle="widthOrigin" data-filename="Group 4.png" data-origin-width="1989" data-origin-height="1150"><span data-url="https://blog.kakaocdn.net/dna/H1FyI/btrqRSB3gEy/AAAAAAAAAAAAAAAAAAAAAFtM55co3JKc6V686i5oz6CJ79QyTNgsBlAVrahEP-Fy/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1756652399&amp;allow_ip=&amp;allow_referer=&amp;signature=242PqomUwFJZrv9iqkN1IRJXtAc%3D" data-phocus="https://blog.kakaocdn.net/dna/H1FyI/btrqRSB3gEy/AAAAAAAAAAAAAAAAAAAAAFtM55co3JKc6V686i5oz6CJ79QyTNgsBlAVrahEP-Fy/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1756652399&amp;allow_ip=&amp;allow_referer=&amp;signature=242PqomUwFJZrv9iqkN1IRJXtAc%3D" data-alt="LXC Architecture"><img src="./Docker Engine, 제대로 이해하기 (1)_files/img(1).png" srcset="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FH1FyI%2FbtrqRSB3gEy%2FAAAAAAAAAAAAAAAAAAAAAFtM55co3JKc6V686i5oz6CJ79QyTNgsBlAVrahEP-Fy%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3D242PqomUwFJZrv9iqkN1IRJXtAc%253D" onerror="this.onerror=null; this.src=&#39;//t1.daumcdn.net/tistory_admin/static/images/no-image-v1.png&#39;; this.srcset=&#39;//t1.daumcdn.net/tistory_admin/static/images/no-image-v1.png&#39;;" loading="lazy" width="500" height="289" data-filename="Group 4.png" data-origin-width="1989" data-origin-height="1150" data-phocus-index="1"></span><figcaption>LXC Architecture</figcaption>
+</figure>
+<p></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="color: #000000;"><span style="font-family: &#39;Noto Sans Light&#39;;"><b>LXC</b>는 <span style="background-color: #ffffff;">단일 컨트롤 호스트 상에서 여러개의 고립된 리눅스 시스템(컨테이너)들을 실행하기 위한 <b>운영 시스템 레벨 가상화 방법</b>입니다.</span>&nbsp;</span><span style="font-family: &#39;Noto Sans Light&#39;;">daemon에게 Linux kernel에 존재하는 컨테이너의 기본 building block에 대한 <b>namespaces</b>나 <b>cgroups</b>(control groups)와 같은 접근을 제공했습니다.</span></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="color: #000000;"><span style="font-family: &#39;Noto Sans Light&#39;;">namespace는 간단히 말하자면,&nbsp; 운영 시스템을 쪼개서 각각 고립된 상태로 운영이 되는 개념을 의미해요.&nbsp;</span></span></p>
+<p data-ke-size="size16"><span style="color: #000000;"><span style="font-family: &#39;Noto Sans Light&#39;;">cgroups는 간단히 말하자면,&nbsp; namespaces으로 고립된 환경에서 사용할 자원을 제한하는 역할 등을 하는 개념입니다.</span></span></p>
+<p data-ke-size="size16"><span style="color: #000000;"><span style="font-family: &#39;Noto Sans Light&#39;;">이 부분은 Building Block을 이해한 후 다시 보면 이해하는데 도움이 되실거에요.</span></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">어쨌든, 분리된 후 고립된 각각의 환경들이 만들어진다는 것을 확인할 수 있는데요.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">container의 개념을 알고 있다면, 바로 이 기술이 container 기술의 근간이라는 것을 예상할 수 있습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<h4 data-ke-size="size20"><span style="color: #000000;"><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;;"># LXC의 문제점</span><span style="font-family: &#39;Noto Sans Light&#39;;"></span></span></h4>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">LXC는 <b>리눅스에 특화되어 있는데</b>, Docker가 Multi-Platform을 목표로 하는데 큰 리스크였습니다.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">또한, 시스템을 구성하는 핵심적인 요소가 외부 시스템에 의존한다는 문제도 있었습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #333333;"><span style="color: #000000;">때문에 Docker사는 LXC를 대체하기 위해</span> <span style="color: #2496ed;"><a style="color: #2496ed;" href="https://pkg.go.dev/github.com/opencontainers/runc/libcontainer" target="_blank" rel="noopener">libcontainer</a></span><span style="color: #000000;">라는 독자적인 툴을 개발했으며, </span></span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">go 언어로 작성되어 platform-agnostic(불특정 플랫폼) 툴로 만들어주었습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="background-color: #ffffff; color: #000000; font-family: &#39;Noto Sans Light&#39;;">그래서 Docker 0.9부터 기본 실행 드라이버를 <b>LXC에서 libcontainer로 대체</b>했습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<h4 data-ke-size="size20"><span style="background-color: #ffffff; font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;; color: #000000;"># Libcontainer</span></h4>
+<p data-ke-size="size16"><span style="background-color: #ffffff; color: #000000; font-family: &#39;Noto Sans Light&#39;;"><b>Libcontainer</b>는 현재의 Docker Engine에서 사용하고 있는 주요 컴포넌트입니다. </span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;"><span style="background-color: #ffffff;">Go 언어로 만들어져서 Container를 생성 시 <span style="background-color: #ffffff;">namespaces, cgroups, capabilities 를 제공하고, </span></span><span style="background-color: #ffffff;"><span style="background-color: #ffffff;"><span style="background-color: #ffffff;">filesystem의 접근을 제한할 수 있습니다. </span></span></span></span></p>
+<p data-ke-size="size16"><span style="background-color: #ffffff; color: #000000; font-family: &#39;Noto Sans Light&#39;;"><span style="background-color: #ffffff;"><span style="background-color: #ffffff;"><span style="background-color: #ffffff;">컨테이너가 생성된 후 작업을 수행할 수 있도록 컨테이너의 수명 주기를 관리할 수 있습니다.</span></span></span></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p></p><figure class="imageblock alignCenter" data-ke-mobilestyle="widthOrigin" data-filename="Group 8.png" data-origin-width="1940" data-origin-height="1231"><span data-url="https://blog.kakaocdn.net/dna/Ciow3/btrqVwFf41i/AAAAAAAAAAAAAAAAAAAAAGSVuSnwvtXsR24XIyUy9bthjkNKHp8ATSKxIarr36-u/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1756652399&amp;allow_ip=&amp;allow_referer=&amp;signature=j7YSaXbeRrT48iSDyB1jlZKKyyE%3D" data-phocus="https://blog.kakaocdn.net/dna/Ciow3/btrqVwFf41i/AAAAAAAAAAAAAAAAAAAAAGSVuSnwvtXsR24XIyUy9bthjkNKHp8ATSKxIarr36-u/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1756652399&amp;allow_ip=&amp;allow_referer=&amp;signature=j7YSaXbeRrT48iSDyB1jlZKKyyE%3D" data-alt="docker architecture"><img src="./Docker Engine, 제대로 이해하기 (1)_files/img(2).png" srcset="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FCiow3%2FbtrqVwFf41i%2FAAAAAAAAAAAAAAAAAAAAAGSVuSnwvtXsR24XIyUy9bthjkNKHp8ATSKxIarr36-u%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3Dj7YSaXbeRrT48iSDyB1jlZKKyyE%253D" onerror="this.onerror=null; this.src=&#39;//t1.daumcdn.net/tistory_admin/static/images/no-image-v1.png&#39;; this.srcset=&#39;//t1.daumcdn.net/tistory_admin/static/images/no-image-v1.png&#39;;" loading="lazy" width="476" height="302" data-filename="Group 8.png" data-origin-width="1940" data-origin-height="1231" data-phocus-index="2"></span><figcaption>docker architecture</figcaption>
+</figure>
+<p></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="background-color: #ffffff; color: #000000; font-family: &#39;Noto Sans Light&#39;;">위 그림을 보면 알 수 있듯이, Libcontainer는Docker와 분리된 LXC와는 다르게, </span></p>
+<p data-ke-size="size16"><span style="background-color: #ffffff; color: #000000; font-family: &#39;Noto Sans Light&#39;;"><span style="background-color: #ffffff;">Docker 내부에서 실행되고 있는 것을 확인할 수 있습니다.&nbsp;</span></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">Docker에서는 자체적으로 제작한 libcontainer의 CLI wrapper인 <b>runc</b>를 사용합니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">자, 그럼 이제 본격적으로 컨테이너의 구조를 알아볼게요.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">도커 내부를 알아가기 전에 도커 용어를 확실히 하고 넘어가야 할 것 같아요.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">도커의 구조를 살피며 자주 사용할 단어들을 한번씩 짚고 가겠습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<h2 data-ke-size="size26" id="h-tag-5"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;"><b>⚙️&nbsp; Docker Engine</b></span></h2>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;"><span style="background-color: #ffffff;">Docker는 Client-Server 모델을 구현한</span><span style="background-color: #ffffff;">&nbsp;애플리케이션입니다.</span></span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">Docker Engine은 Docker Components와 서비스를 제공하는 <b>컨테이너를 구축하고 실행하는 기본 핵심 소프트웨어</b>입니다.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">&nbsp;</span><br><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">Docker Engine은 Docker Daemon, REST API, API를 통해 도커 데몬과 통신하는 CLI로 모듈식으로 구성되어있습니다.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">개발자들이 Docker라고 할 때, 주로 Docker engine을 의미합니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">Docker Engine은 자동차의 엔진과 비교할 수 있습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size14"><span style="color: #9d9d9d;"><i>자동차 엔진과 도커 엔진은 비유를 하자면, 둘 다 모듈식이고 많은 전용 부품들에 의해 연결되어 제작됩니다.</i></span><span style="color: #9d9d9d;"><i></i></span><span style="color: #9d9d9d;"><i></i></span></p>
+<p data-ke-size="size14"><span style="color: #9d9d9d;"><i>Car Engine — intake manifolds, throttle body, cylinders, spark plugs, exhaust manifolds etc. </i></span><br><span style="color: #9d9d9d;"><i>Docker Engine — APIs, execution driver, runtimes, shims etc.</i></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="background-color: #ffffff; color: #000000; font-family: &#39;Noto Sans Light&#39;;"><span style="background-color: #ffffff;">아래의 그림으로 구조를 쉽게 파악할 수 있습니다.</span></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p></p><figure class="imageblock alignCenter" data-ke-mobilestyle="widthOrigin" data-filename="Group 3.png" data-origin-width="2125" data-origin-height="1955"><span data-url="https://blog.kakaocdn.net/dna/bPzExH/btrqQdT1n1z/AAAAAAAAAAAAAAAAAAAAAJGYv1aNS0mBkzhVlHLurPk64Vi-JnxtvOBwwiq2VCgn/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1756652399&amp;allow_ip=&amp;allow_referer=&amp;signature=rwvcwnJ98cgErJyGj3n17ZIcI7E%3D" data-phocus="https://blog.kakaocdn.net/dna/bPzExH/btrqQdT1n1z/AAAAAAAAAAAAAAAAAAAAAJGYv1aNS0mBkzhVlHLurPk64Vi-JnxtvOBwwiq2VCgn/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1756652399&amp;allow_ip=&amp;allow_referer=&amp;signature=rwvcwnJ98cgErJyGj3n17ZIcI7E%3D" data-alt="Docker Engine"><img src="./Docker Engine, 제대로 이해하기 (1)_files/img(3).png" srcset="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FbPzExH%2FbtrqQdT1n1z%2FAAAAAAAAAAAAAAAAAAAAAJGYv1aNS0mBkzhVlHLurPk64Vi-JnxtvOBwwiq2VCgn%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DrwvcwnJ98cgErJyGj3n17ZIcI7E%253D" onerror="this.onerror=null; this.src=&#39;//t1.daumcdn.net/tistory_admin/static/images/no-image-v1.png&#39;; this.srcset=&#39;//t1.daumcdn.net/tistory_admin/static/images/no-image-v1.png&#39;;" loading="lazy" width="585" height="538" data-filename="Group 3.png" data-origin-width="2125" data-origin-height="1955" data-phocus-index="3"></span><figcaption>Docker Engine</figcaption>
+</figure>
+<p></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="background-color: #ffffff; color: #000000; font-family: &#39;Noto Sans Light&#39;;"><span style="background-color: #ffffff;"><span style="background-color: #ffffff;">컨테이너를 빌드, 실행, 배포하는 등의 무거운 작업은&nbsp;<span style="background-color: #ffffff;">Docker Daemon이 하며,</span></span></span></span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;"><span style="background-color: #ffffff;"><span style="background-color: #ffffff;"></span></span><span style="background-color: #ffffff;"><span style="background-color: #ffffff;">Docker Client는 이러한&nbsp;로컬 혹은 원격의&nbsp;Docker&nbsp;<span style="background-color: #ffffff;">Daemon</span>과 통신합니다.</span></span></span></p>
+<p data-ke-size="size16"><span style="background-color: #ffffff; color: #000000; font-family: &#39;Noto Sans Light&#39;;"><span style="background-color: #ffffff;">통신을 할 때에는 UNIX socket(<span style="background-color: #ffffff;">/var/run/</span>docker<span style="background-color: #ffffff;">.</span>sock) 또는 네트워크 인터페이스를 통한 REST API를 사용합니다.</span></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;; color: #9d9d9d;">주로 사람들이&nbsp;<i>"docker"</i>라는 단어를 말할 때는 다양한 의미를 가질 수 있는데요.</span></p>
+<p data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;; color: #9d9d9d;"><i>"docker"</i>는 Docker Engine 뿐만 아니라 Docker Client, 혹은 Docker Inc.(도커 개발사)를 의미할 수도 있습니다.</span></p>
+<p data-ke-size="size14">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<h3 data-ke-size="size23" id="h-tag-6"><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;; color: #000000;"><b>✔️&nbsp; big picture</b></span></h3>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">Docker Engine이 동작되는 큰 그림을 먼저 볼게요.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">아래의 기능들을 먼저 익힌다음 읽어도 좋습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size18"><span style="color: #000000;"><b><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;;">1) docker client</span></b></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p></p><figure class="imageblock alignCenter" data-ke-mobilestyle="widthOrigin" data-filename="Group 5.png" data-origin-width="1910" data-origin-height="735"><span data-url="https://blog.kakaocdn.net/dna/Xei9j/btrqMwmWWxv/AAAAAAAAAAAAAAAAAAAAAC15xe8qybcP9C3obtO9oWvriib7DjMwk9V_KYNnoCCe/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1756652399&amp;allow_ip=&amp;allow_referer=&amp;signature=RRFu0gGh8Z9laOYzogPoVb%2BljQE%3D" data-phocus="https://blog.kakaocdn.net/dna/Xei9j/btrqMwmWWxv/AAAAAAAAAAAAAAAAAAAAAC15xe8qybcP9C3obtO9oWvriib7DjMwk9V_KYNnoCCe/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1756652399&amp;allow_ip=&amp;allow_referer=&amp;signature=RRFu0gGh8Z9laOYzogPoVb%2BljQE%3D"><img src="./Docker Engine, 제대로 이해하기 (1)_files/img(4).png" srcset="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FXei9j%2FbtrqMwmWWxv%2FAAAAAAAAAAAAAAAAAAAAAC15xe8qybcP9C3obtO9oWvriib7DjMwk9V_KYNnoCCe%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DRRFu0gGh8Z9laOYzogPoVb%252BljQE%253D" onerror="this.onerror=null; this.src=&#39;//t1.daumcdn.net/tistory_admin/static/images/no-image-v1.png&#39;; this.srcset=&#39;//t1.daumcdn.net/tistory_admin/static/images/no-image-v1.png&#39;;" loading="lazy" width="611" height="235" data-filename="Group 5.png" data-origin-width="1910" data-origin-height="735" data-phocus-index="4"></span></figure>
+<p></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">가장 먼저, 유저가 Docker CLI를 통해 아래와 같은 명령어를 입력합니다.&nbsp;</span></p>
+<p data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">&nbsp;(e.g. <code>$&nbsp;docker&nbsp;container&nbsp;run&nbsp;--name&nbsp;ctr1&nbsp;-it&nbsp;alpine:latest&nbsp;sh </code>)</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">Docker CLI에 입력하면 Docker client는 적절한 API Payload로 변환해서 </span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">Docker Daemon(이하 dockerd)에게 REST API로 POST 요청을 합니다. </span></p>
+<p data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">(e.g. <code>POST /containers/create HTTP/1.1 </code>)</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size18"><span style="color: #000000;"><b><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;;">2) dockerd</span></b></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p></p><figure class="imageblock alignCenter" data-ke-mobilestyle="widthOrigin" data-filename="Group 5 (1).png" data-origin-width="1910" data-origin-height="1148"><span data-url="https://blog.kakaocdn.net/dna/DqxIG/btrqNfkHYaC/AAAAAAAAAAAAAAAAAAAAAIh5UMXEEbPEISVqGKeUJSCuOFiOOZsBe7H6rJ0udMe-/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1756652399&amp;allow_ip=&amp;allow_referer=&amp;signature=EofaXLQ1y%2BtE4BDMjwZRWW7EH2M%3D" data-phocus="https://blog.kakaocdn.net/dna/DqxIG/btrqNfkHYaC/AAAAAAAAAAAAAAAAAAAAAIh5UMXEEbPEISVqGKeUJSCuOFiOOZsBe7H6rJ0udMe-/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1756652399&amp;allow_ip=&amp;allow_referer=&amp;signature=EofaXLQ1y%2BtE4BDMjwZRWW7EH2M%3D"><img src="./Docker Engine, 제대로 이해하기 (1)_files/img(5).png" srcset="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FDqxIG%2FbtrqNfkHYaC%2FAAAAAAAAAAAAAAAAAAAAAIh5UMXEEbPEISVqGKeUJSCuOFiOOZsBe7H6rJ0udMe-%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DEofaXLQ1y%252BtE4BDMjwZRWW7EH2M%253D" onerror="this.onerror=null; this.src=&#39;//t1.daumcdn.net/tistory_admin/static/images/no-image-v1.png&#39;; this.srcset=&#39;//t1.daumcdn.net/tistory_admin/static/images/no-image-v1.png&#39;;" loading="lazy" width="600" height="361" data-filename="Group 5 (1).png" data-origin-width="1910" data-origin-height="1148" data-phocus-index="5"></span></figure>
+<p></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">API는 Unix Socket을 통해 dockerd에게 전달됩니다.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">Linux에서 socket은 <code style="font-size: 14px;">/var/run/docker.sock</code> 이고, Windows에서는 <code style="font-size: 14px;">\pipe\docker_engine</code> 입니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="background-color: #fdfdfd; color: #000000; font-family: &#39;Noto Sans Light&#39;;">새 컨테이너를 시작할 때, dockerd는 로컬 이미지가 있는지 확인하고</span></p>
+<p data-ke-size="size16"><span style="background-color: #fdfdfd; color: #000000; font-family: &#39;Noto Sans Light&#39;;">없다면 registry repository에서&nbsp;<span style="background-color: #fdfdfd;">해당하는 이름의 이미지를 가져옵니다.</span></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="background-color: #fdfdfd; color: #000000; font-family: &#39;Noto Sans Light&#39;;">또한 logging drivers와 volume이나 volume drivers를 설정하는 등 컨테이너에 필요한 대부분의 설정을 지정합니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">dockerd가 '새로운 container를 생성하라'는 명령을 수신하면, containerd를 호출합니다.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">이때, dockerd는 CRUD 스타일 API를 통해 gRPC로 containerd와 통신합니다.</span></p>
+<p data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;" data-token-index="0" data-reactroot="">(e.g. <code>client.NewContainer(context, ...) </code>)</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="color: #000000;"><b><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;;" data-token-index="0" data-reactroot="">3) containerd</span></b></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p></p><figure class="imageblock alignCenter" data-ke-mobilestyle="widthOrigin" data-filename="Group 5 (2).png" data-origin-width="1760" data-origin-height="720"><span data-url="https://blog.kakaocdn.net/dna/b2CxRA/btrqNL4LSJI/AAAAAAAAAAAAAAAAAAAAADDMG7VqeidymnI_YI03M7pcgpfQ4b2zxy25S0MBBl21/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1756652399&amp;allow_ip=&amp;allow_referer=&amp;signature=sgiMddXys52W9IqSr0kKnAt8ZxE%3D" data-phocus="https://blog.kakaocdn.net/dna/b2CxRA/btrqNL4LSJI/AAAAAAAAAAAAAAAAAAAAADDMG7VqeidymnI_YI03M7pcgpfQ4b2zxy25S0MBBl21/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1756652399&amp;allow_ip=&amp;allow_referer=&amp;signature=sgiMddXys52W9IqSr0kKnAt8ZxE%3D"><img src="./Docker Engine, 제대로 이해하기 (1)_files/img(6).png" srcset="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2Fb2CxRA%2FbtrqNL4LSJI%2FAAAAAAAAAAAAAAAAAAAAADDMG7VqeidymnI_YI03M7pcgpfQ4b2zxy25S0MBBl21%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DsgiMddXys52W9IqSr0kKnAt8ZxE%253D" onerror="this.onerror=null; this.src=&#39;//t1.daumcdn.net/tistory_admin/static/images/no-image-v1.png&#39;; this.srcset=&#39;//t1.daumcdn.net/tistory_admin/static/images/no-image-v1.png&#39;;" loading="lazy" width="379" height="155" data-filename="Group 5 (2).png" data-origin-width="1760" data-origin-height="720" data-phocus-index="6"></span></figure>
+<p></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">containerd는 실제로 containers를 생성하지 못하고, runc를 통해 생성합니다. </span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">Docker 이미지를 가져와서 컨테이너 구성을 적용하여 runc가 실행할 수 있는 OCI 번들로 변환합니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size18"><span style="color: #000000;"><b><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;;">4) runc</span></b></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p></p><figure class="imageblock alignCenter" data-ke-mobilestyle="widthOrigin" data-filename="Group 5 (4).png" data-origin-width="2078" data-origin-height="1955"><span data-url="https://blog.kakaocdn.net/dna/b3vF4K/btrqNLRetGu/AAAAAAAAAAAAAAAAAAAAANTz0tbFuGzdle23-Lo-AFxVnFsV9vkM7oDx8Qi1Xbb4/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1756652399&amp;allow_ip=&amp;allow_referer=&amp;signature=Wy9%2FyAQF77t3%2Fr3OBD3pHIBgioQ%3D" data-phocus="https://blog.kakaocdn.net/dna/b3vF4K/btrqNLRetGu/AAAAAAAAAAAAAAAAAAAAANTz0tbFuGzdle23-Lo-AFxVnFsV9vkM7oDx8Qi1Xbb4/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1756652399&amp;allow_ip=&amp;allow_referer=&amp;signature=Wy9%2FyAQF77t3%2Fr3OBD3pHIBgioQ%3D"><img src="./Docker Engine, 제대로 이해하기 (1)_files/img(7).png" srcset="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2Fb3vF4K%2FbtrqNLRetGu%2FAAAAAAAAAAAAAAAAAAAAANTz0tbFuGzdle23-Lo-AFxVnFsV9vkM7oDx8Qi1Xbb4%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DWy9%252FyAQF77t3%252Fr3OBD3pHIBgioQ%253D" onerror="this.onerror=null; this.src=&#39;//t1.daumcdn.net/tistory_admin/static/images/no-image-v1.png&#39;; this.srcset=&#39;//t1.daumcdn.net/tistory_admin/static/images/no-image-v1.png&#39;;" loading="lazy" width="430" height="404" data-filename="Group 5 (4).png" data-origin-width="2078" data-origin-height="1955" data-phocus-index="7"></span></figure>
+<p></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">runc(내부의 libcontainer 사용)는 OS 커널에 접속해서&nbsp;</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">컨테이너를 만드는 데 필요한 모든 구성 요소(네임스페이스, cgroup 등)를 하나로 묶습니다. </span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">runc는 새로운 container를 생성합니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size18"><span style="color: #000000;"><b><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;;">5) shim</span></b><span style="background-color: #fdfdfd; font-family: &#39;Noto Sans Light&#39;;"></span></span></p>
+<p></p><figure class="imageblock alignCenter" data-ke-mobilestyle="widthOrigin" data-filename="Group 6.png" data-origin-width="1984" data-origin-height="1955"><span data-url="https://blog.kakaocdn.net/dna/bDbsSf/btrqNee20IJ/AAAAAAAAAAAAAAAAAAAAAHkJCuA2JuG6qEzSaIR5CIeYmOVKKAsamazUnN72XfH1/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1756652399&amp;allow_ip=&amp;allow_referer=&amp;signature=co0fsvfo3h%2FqYHIg8n3lyANSPBw%3D" data-phocus="https://blog.kakaocdn.net/dna/bDbsSf/btrqNee20IJ/AAAAAAAAAAAAAAAAAAAAAHkJCuA2JuG6qEzSaIR5CIeYmOVKKAsamazUnN72XfH1/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1756652399&amp;allow_ip=&amp;allow_referer=&amp;signature=co0fsvfo3h%2FqYHIg8n3lyANSPBw%3D"><img src="./Docker Engine, 제대로 이해하기 (1)_files/img(8).png" srcset="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FbDbsSf%2FbtrqNee20IJ%2FAAAAAAAAAAAAAAAAAAAAAHkJCuA2JuG6qEzSaIR5CIeYmOVKKAsamazUnN72XfH1%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3Dco0fsvfo3h%252FqYHIg8n3lyANSPBw%253D" onerror="this.onerror=null; this.src=&#39;//t1.daumcdn.net/tistory_admin/static/images/no-image-v1.png&#39;; this.srcset=&#39;//t1.daumcdn.net/tistory_admin/static/images/no-image-v1.png&#39;;" loading="lazy" width="434" height="427" data-filename="Group 6.png" data-origin-width="1984" data-origin-height="1955" data-phocus-index="8"></span></figure>
+<p></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="background-color: #fdfdfd; color: #000000; font-family: &#39;Noto Sans Light&#39;;">그 다음 컨테이너를 시작하기 위해 docker-containerd-shim과 같은 shim을 실행합니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">컨테이너 프로세스는 runc의 하위 프로세스로 시작되는데, 컨테이너 프로세스가 실행하자마자 runc가 종료exit됩니다.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;" data-token-index="0" data-reactroot="">이 때, docker-containerd-shim이 새로운 상위 프로세스가 되어 컨테이너의 생명주기를 관리합니다.&nbsp;</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;" data-token-index="0" data-reactroot="">자, 이제 위에서 언급된 모든 기술을 알아보도록 하겠습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<h3 data-ke-size="size23" id="h-tag-7"><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;; color: #000000;"><b><b>✔️&nbsp;&nbsp;</b>docker client</b></span></h3>
+<p data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;; color: #9d9d9d;"><i>= docker</i></span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;"><span style="background-color: #ffffff;">흔히 docker라고 부르는 것 중 하나가 바로 Docker Client입니다.</span><span style="background-color: #ffffff;"></span></span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;"><span style="background-color: #ffffff;">단순히 </span><span style="background-color: #ffffff;">Docker</span><span style="background-color: #ffffff;">&nbsp;CLI</span><span style="background-color: #ffffff;">라고 이해하면 편할텐데요.</span></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="background-color: #ffffff; color: #000000; font-family: &#39;Noto Sans Light&#39;;">Docker Client는 개발자들이 Docker를 사용하는 <span style="background-color: #ffffff;">Docker</span> CLI나 Docker Compose로,&nbsp;</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;"><span style="background-color: #ffffff;"><code>$ docker run</code> 과 같은 명령어를 <b>dockerd</b>에게<b> </b></span><span style="background-color: #ffffff;"><b>REST API </b>형태<span style="background-color: #ffffff;">로 전달합니다.</span></span></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="background-color: #ffffff; color: #333333; font-family: &#39;Noto Sans Light&#39;;"><span style="background-color: #ffffff;"><span style="color: #000000;">이 글을 쓰는 시점에서는</span> <a href="https://docs.docker.com/engine/api/v1.41/" target="_blank" rel="noopener">Docker 1.41</a> <span style="color: #000000;">이 가장 최신이며, 링크를 확인하시면 API 명세를 확인할 수 있습니다.</span></span></span></p>
+<p data-ke-size="size16"><span style="background-color: #ffffff; color: #000000; font-family: &#39;Noto Sans Light&#39;;"><span style="background-color: #ffffff;">또한, Docker Client</span>는 다수의 데몬과 통신할 수도 있습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;;">글을 정리하며 통신 과정 이해에 참고한 <a href="https://www.youtube.com/watch?v=a5td09OWFXA" target="_blank" rel="noopener">통신 테스트 영상(Docker remote REST API)</a>을 보면 이해에 도움이 될 듯합니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<h3 data-ke-size="size23" id="h-tag-8"><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;; color: #000000;"><b><b>✔️&nbsp;&nbsp;</b>dockerd</b></span></h3>
+<p data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;; color: #9d9d9d;"><i>= Docker Daemon (Server)</i></span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">도커 데몬(dockerd)은 Docker API 요청을 수신하고,</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">도커 데몬은 다른 데몬과 통신하여 도커 서비스를 관리할 수도 있습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">dockerd의 역할로는 이미지 관리, 이미지 빌드, REST API, 인증, 보안, 코어 네트워킹, 오케스트레이션 등이 있습니다.</span></p>
+<p data-ke-size="size16"><span style="color: #000000;"><span style="font-family: &#39;Noto Sans Light&#39;;">과거의 docker daemon과는 다르게 컨테이너의 실행과 컨테이너 런타임 코드가 모듈화로 분리되어 위의 기능들만 남았습니다.</span></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<h3 data-ke-size="size23" id="h-tag-9"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;"><b><span style="font-family: &#39;Noto Sans Light&#39;;"><b>✔️&nbsp;&nbsp;</b></span>containerd</b></span></h3>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #333333;"><span style="color: #2496ed;"><a style="color: #2496ed;" href="https://containerd.io/" target="_blank" rel="noopener">containerd</a></span><span style="color: #000000;">는 Container의 생명주기를 관리합니다 (<i>= container lifecycle operations</i>).</span></span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">containerd는 원래 작고, 가벼운 <b>Container lifecycle operations</b>으로 설계되었는데, </span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">시간이 지나면서 image pulls, volumes and networks와 같은 기능들이 확장되었습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size14"><span style="color: #9d9d9d; font-family: &#39;Noto Sans Light&#39;;">기능들이 추가된 이유 중 하나는 다른 프로젝트에서 더 쉽게 사용할 수 있도록 하기 위해서인데요.</span></p>
+<p data-ke-size="size14"><span style="color: #9d9d9d; font-family: &#39;Noto Sans Light&#39;;">예를 들어, Kubernetes같은 프로젝트에서는 containerd를 통해 이미지를 push하고 pull하는 것과 같은 추가적인 작업이 유용하다는 점이 있습니다. </span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">모든 추가적인 기능들은 <b>옵션</b>이기 때문에 원하는 것들을 선택하여 반영할 수 있습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<h4 data-ke-size="size20"><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;; color: #000000;"># High-Level Runtime</span></h4>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">containerd는 High-Level Runtime입니다. </span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">High-Level Runtime은&nbsp;보통 이미지 관리, gRPC/Web API와 같이 <b>컨테이너를 관리하는 것 이상의 높은 수준의 기능을 지원</b>하는 런타임을 의미합니다. "high-level container tools", "high-level container runtimes" 으로 부르거나, 가끔은 그냥 "container runtimes”이라고도 부릅니다.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">대조적으로, Low-Level Runtime에는 다음으로 볼 runc가 있습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size18">&nbsp;</p>
+<p data-ke-size="size16"><span style="color: #000000;"><span style="font-family: &#39;Noto Sans Light&#39;;">Docker Client로부터 Container 관련 요청은 dockerd를 거쳐 gRPC 통신을 통해 containerd 로 전달됩니다. </span><span style="font-family: &#39;Noto Sans Light&#39;;">그리고 나서, containerd는 컨테이너의 관리를 위해 runc를 사용하는데요. 그럼, runc가 무엇인지 알아볼게요.</span></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<h3 data-ke-size="size23" id="h-tag-10"><span style="color: #000000; font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;;"><b><b>✔️&nbsp;&nbsp;</b>runc</b></span></h3>
+<p data-ke-size="size16"><span style="color: #000000; font-family: &#39;Noto Sans Light&#39;;">runc는&nbsp;<i>*</i>libcontainer용 CLI Wrapper로,<span style="letter-spacing: 0px;">&nbsp;독립된 <b>container runtime</b>입니다.</span></span></p>
+<p data-ke-size="size16"><span style="color: #000000; font-family: &#39;Noto Sans Light&#39;;">docker가 container 관련된 기능들을&nbsp;쉽게 사용할 수 있도록 해주는 가볍고 이식가능한 툴입니다.</span></p>
+<p data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">다시 말해, container 동작 환경이 갖추어진 가볍고 이식 가능한 툴입니다.</span></p>
+<p data-ke-size="size16"><span style="color: #000000;">Docker에서 runc는 목적은 단 하나인데요, 바로&nbsp;<b>Container 생성</b>입니다.</span></p>
+<p data-ke-size="size14">&nbsp;</p>
+<p data-ke-size="size14">&nbsp;</p>
+<p data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;; color: #333333;">*<span>&nbsp;</span><b>libcontainer </b>: </span><span style="font-family: &#39;Noto Sans Light&#39;; color: #333333;">D</span><span style="font-family: &#39;Noto Sans Light&#39;; color: #333333;">ocker사가<span>&nbsp;</span><span>multi-platform 서비스를 만들기<span>&nbsp;</span></span>위해 go 언어로 작성된 패키지. (History - LXC 참고)</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<h4 data-ke-size="size20"><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;; color: #000000;"># OCI</span></h4>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">runc는 OCI container-runtime-spec의 구현체입니다.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #333333;"><span style="color: #2496ed;"><a style="color: #2496ed;" href="https://github.com/opencontainers/runtime-spec">OCI(Open Container Initiative)</a></span><span style="color: #000000;">는 kernel의 container 관련 기술을 다루는 interface를 표준화시킨 기준입니다.</span></span></p>
+<p data-ke-size="size16"><span style="color: #000000;">그래서 runc가 동작하는 계층을 OCI Layer라고 부르기도 합니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<h4 data-ke-size="size20"><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;; color: #000000;"># Low-Level Runtimes</span></h4>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">Low-Level Runtimes는 보통 <b>컨테이너를 운영하는 것</b>에 초점을 맞춘 실제 컨테이너 런타임을 의미합니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;"><span style="letter-spacing: 0px;">runc는 독립된 컨테이너 런타임이기 때문에 바이너리</span>로 다운받고 빌드할 수 있습니다.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">runc (OCI) container를 빌드하고 실행시키는데 모든 것을 갖출 수 있다는 의미입니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #333333;"><span style="color: #000000;">하지만 이것은 골격</span><span style="color: #9d9d9d;">bare bones</span><span style="color: #000000;">일뿐이며 매우 낮은 레벨</span><span style="color: #9d9d9d;">low-level</span><span style="color: #000000;">입니다. </span></span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #333333;"><span style="color: #000000;">즉, <b>완전한 Docker 엔진의 특성</b></span><span style="color: #9d9d9d;">full-blown Docker engine</span><span style="color: #000000;">을 가질 수는 없습니다.</span></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<h3 data-ke-size="size23" id="h-tag-11"><span style="font-family: &#39;Noto Sans Demilight&#39;, &#39;Noto Sans KR&#39;; color: #000000;"><b><b>✔️&nbsp;&nbsp;</b>shim</b></span></h3>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">앞에서 containerd가 새로운 컨테이너를 만들기 위해 runc를 사용한다고 했는데요. </span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">생성되는 모든 container 당 runc의 새로운 인스턴스를 fork 합니다. </span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">그러나 각 컨테이너가 생성되면, 상위 runc 프로세스가 종료됩니다.</span></p>
+<p data-ke-size="size14"><span style="color: #9d9d9d; font-family: &#39;Noto Sans Light&#39;;">수백 개의&nbsp;runc 인스턴스를 실행하지 않고도 수백 개의&nbsp;container를 실행할 수 있습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; letter-spacing: 0px; color: #000000;">컨테이너의 할당된 부모 runc 프로세스가 종료되면, 연결된 containerd-shim 프로세스가 컨테이너의 부모프로세스가 됩니다.</span></p>
+<p data-ke-size="size16"><span style="background-color: #ffffff; color: #000000; font-family: &#39;Noto Sans Light&#39;;">이는&nbsp;<span style="background-color: #ffffff;">containerd에게 <span style="background-color: #ffffff;">컨테이너의&nbsp;</span></span><span style="background-color: #ffffff;"><b>file descriptor</b><span style="background-color: #fdfdfd;">(e.g. stdin/out)</span></span>와 <b>종료 상태</b>를 관리하는 데 필요한 <b>최소한의 코드</b>를 메모리에 남깁니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size14"><span style="background-color: #fdfdfd; color: #333333; font-family: &#39;Noto Sans Light&#39;;">*<b><span style="background-color: #ffffff;"><span style="background-color: #ffffff;">&nbsp;</span></span><span style="background-color: #ffffff;">file descriptor</span></b></span></p>
+<p data-ke-size="size14"><span style="color: #333333; font-family: &#39;Noto Sans Light&#39;;"><span style="background-color: #fdfdfd;"> </span>프로세스에서 열린 파일의 목록을 관리하는 파일 테이블의 인덱스입니다. <span style="background-color: #fdfdfd;"></span>프로그램이 프로세스로 메모리에서 실행될 때, 기본적으로 할당되는 파일디스크립터는 표준입력(Standard Input), 표준 출력(Standard Output), 표준에러(Standard Error)이며 이들에게 각각 0, 1, 2라는 정수(file table의 인덱스)가 할당됩니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">shim이 컨테이너의 상위 프로세서로서 수행하는 <b>주요 책임</b>은 아래와 같습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #333333;"><span style="color: #000000;">👉🏻 daemon이 재시작될 때,</span> <span style="color: #9d9d9d;">파이프가 닫히는 등의 이유 때문에</span><span style="color: #000000;"> container가 종료되지 않도록 STDIN과 STDOUT 스트림을 열린 상태로 유지합니다.</span></span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">👉🏻 daemon에게 container의 종료 상태를 보고합니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">이렇게 Docker Engine을 다루는 첫 번째 포스팅을 마치겠습니다.</span></p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">피드백 내용이 있다면 댓글로 남겨주시면 감사하겠습니다.</span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><span style="font-family: &#39;Noto Sans Light&#39;;"><span style="color: #2496ed;"><a style="color: #2496ed;" href="https://gngsn.tistory.com/129" target="_blank" rel="noopener">다음 포스팅은 namespace, cgroup 을 통해 컨테이너 가상화가 실현될 수 있었던 내용</a></span><span style="color: #000000;">을 다루겠습니다.</span></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">참고 자료</p>
+<p data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">- O'Reilly - "Docker Deep Dive, The Docker Engine"</span></p>
+<p data-ke-size="size14"><span style="font-family: &#39;Noto Sans Light&#39;; color: #000000;">- O'Reilly - "Docker: Up &amp; Running, 2nd Edition"</span></p>
+<p data-ke-size="size14"><span style="color: #000000; font-family: &#39;Noto Sans Light&#39;;">- <a style="color: #000000;" href="https://docs.docker.com/engine/" target="_blank" rel="noopener">Docker Engine 공식 문서</a></span></p>
+<p data-ke-size="size16">&nbsp;</p></div><div class="google-auto-placed" style="width: 100%; height: auto; clear: both; text-align: center;"><ins data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-4553219130656487" data-adsbygoogle-status="done" style="display: block; margin: 10px auto; background-color: transparent; height: 280px;"><div id="aswift_2_host" style="border: none; height: 280px; width: 697px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"></div></ins></div>
+            <!-- System - START -->
+
+<!-- System - END -->
+
+<script onerror="changeAdsenseToNaverAd()" async="" src="./Docker Engine, 제대로 이해하기 (1)_files/f(11).txt" crossorigin="anonymous" data-checked-head="true"></script>
+<!-- inventory -->
+<ins class="adsbygoogle" style="margin: 50px 0px; display: block; height: 280px;" data-ad-client="ca-pub-9527582522912841" data-ad-slot="4947159016" data-ad-format="auto" data-full-width-responsive="true" data-ad-type="inventory" data-ad-adfit-unit="DAN-HCZEy0KQLPMGnGuC" data-adsbygoogle-status="done"><div id="aswift_1_host" style="border: none; height: 280px; width: 697px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"></div></ins>
+
+<script id="adsense_script">
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script>
+    if(window.observeAdsenseUnfilledState !== undefined){ observeAdsenseUnfilledState(); }
+</script>
+<div data-tistory-react-app="NaverAd"></div>
+
+                    <div class="container_postbtn #post_button_group">
+  <div class="postbtn_like"><script>window.ReactionButtonType = 'reaction';
+window.ReactionApiUrl = '//gngsn.tistory.com/reaction';
+window.ReactionReqBody = {
+    entryId: 128
+}</script>
+<div class="wrap_btn" id="reaction-128" data-tistory-react-app="Reaction"><button class="btn_post uoc-icon" data-tiara-action-name="공감_클릭"><div class="uoc-icon"><span class="ico_postbtn ico_like">좋아요</span><span class="txt_like uoc-count">9</span></div></button></div><div class="wrap_btn wrap_btn_share"><button type="button" class="btn_post sns_btn btn_share" aria-expanded="false" data-thumbnail-url="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FnLBTy%2FbtseH0SSSyQ%2FAAAAAAAAAAAAAAAAAAAAANtjkZRL_az_eeCQHhO2E1u2vkAAVRuuPfNihV7UYeBO%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DKFuV3y6ZqxWTxOdNwKaN5zq6wvo%253D" data-title="Docker Engine, 제대로 이해하기 (1)" data-description="📌  Docker Series&gt; Docker Engine, 제대로 이해하기 (1) - docker engine deep diveDocker Engine, 제대로 이해하기 (2) - namespace, cgroupDocker Network, 제대로 이해하기 (1) - libnetworkDocker Network, 제대로 이해하기 (2) - bridge, host, none driversDocker, 제대로 사용하기 - Commands안녕하세요. 오늘은 Docker Engine에 대해 깊게 다루려고 합니다. 이 포스팅의 목적은 dockerEngine의 내부 구조와 동작원리 등을 최대한 자세히 다루는데 있습니다.이 글을 읽는 독자가 Docker image, container 등 기본적인 개념을 이해한다는 가.." data-profile-image="https://tistory1.daumcdn.net/tistory/3172059/attach/3e56f2f1e68c446d96086aa70aa9d34f" data-profile-name="gngsn" data-pc-url="https://gngsn.tistory.com/128" data-relative-pc-url="/128" data-blog-title="ENFJ.dev"><span class="ico_postbtn ico_share">공유하기</span></button>
+  <div class="layer_post" id="tistorySnsLayer" style="display: none;"><div class="bundle_post"><button class="btn_mark" data-service="url" data-tiara-action-name="공유_클릭" data-tiara-layer="copy_url" data-tiara-copy="URL복사"><span class="ico_sns ico_url"></span><span class="txt_sns">URL 복사</span></button><button class="btn_mark" data-service="kakaotalk" data-tiara-action-name="공유_클릭" data-tiara-layer="kakao" data-tiara-copy="카카오톡 공유"><span class="ico_sns ico_kt"></span><span class="txt_sns">카카오톡 공유</span></button><button class="btn_mark" data-service="facebook" data-tiara-action-name="공유_클릭" data-tiara-layer="facebook" data-tiara-copy="페이스북 공유"><span class="ico_sns ico_fb"></span><span class="txt_sns">페이스북 공유</span></button><button class="btn_mark" data-service="twitter" data-tiara-action-name="공유_클릭" data-tiara-layer="X" data-tiara-copy="엑스 공유"><span class="ico_sns ico_x"></span><span class="txt_sns">엑스 공유</span></button><span class="ico_postbtn ico_arrbt"></span></div></div>
+</div><div class="wrap_btn wrap_btn_etc" data-entry-id="128" data-entry-visibility="public" data-category-visibility="public"><button type="button" class="btn_post btn_etc2" aria-expanded="false"><span class="ico_postbtn ico_etc">게시글 관리</span></button>
+  <div class="layer_post" id="tistoryEtcLayer" style="display: none;"></div>
+</div></div>
+<button type="button" class="btn_menu_toolbar btn_subscription #subscribe" data-blog-id="3172059" data-url="https://gngsn.tistory.com/128" data-device="web_pc" data-tiara-action-name="구독 버튼_클릭" data-tiara-copy="구독하기"><em class="txt_state">구독하기</em><strong class="txt_tool_id">ENFJ.dev</strong><span class="img_common_tistory ico_check_type1"></span></button><div class="postbtn_ccl" data-ccl-type="1" data-ccl-derive="2">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ko" target="_blank" class="link_ccl" rel="license">
+        <span class="bundle_ccl">
+            <span class="ico_postbtn ico_ccl1">저작자표시</span> <span class="ico_postbtn ico_ccl2">비영리</span> <span class="ico_postbtn ico_ccl3">변경금지</span> 
+        </span>
+        <span class="screen_out">(새창열림)</span>
+    </a>
+</div>
+<!--
+<rdf:RDF xmlns="https://web.resource.org/cc/" xmlns:dc="https://purl.org/dc/elements/1.1/" xmlns:rdf="https://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <Work rdf:about="">
+        <license rdf:resource="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ko" />
+    </Work>
+    <License rdf:about="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ko">
+        <permits rdf:resource="https://web.resource.org/cc/Reproduction"/>
+        <permits rdf:resource="https://web.resource.org/cc/Distribution"/>
+        <requires rdf:resource="https://web.resource.org/cc/Notice"/>
+        <requires rdf:resource="https://web.resource.org/cc/Attribution"/>
+        <prohibits rdf:resource="https://web.resource.org/cc/CommercialUse"/>
+
+    </License>
+</rdf:RDF>
+-->  <div data-tistory-react-app="SupportButton"></div>
+</div>
+
+                    <!-- PostListinCategory - START -->
+<div class="another_category another_category_color_gray">
+  <h4>'<a href="https://gngsn.tistory.com/category/BACKEND">BACKEND</a> &gt; <a href="https://gngsn.tistory.com/category/BACKEND/Docker%20%26%20Kubernetes">Docker &amp; Kubernetes</a>' 카테고리의 다른 글</h4>
+  <div class="table-overflow"><table>
+    <tbody><tr>
+      <th><a href="https://gngsn.tistory.com/269">Docker Swarm, 제대로 이해하기 - Swarm &amp; Service</a>&nbsp;&nbsp;<span>(2)</span></th>
+      <td>2023.10.30</td>
+    </tr>
+    <tr>
+      <th><a href="https://gngsn.tistory.com/268">Docker, 제대로 사용하기 - Commands</a>&nbsp;&nbsp;<span>(2)</span></th>
+      <td>2023.10.17</td>
+    </tr>
+    <tr>
+      <th><a href="https://gngsn.tistory.com/140">Docker Network, 제대로 이해하기 (2)</a>&nbsp;&nbsp;<span>(2)</span></th>
+      <td>2022.02.15</td>
+    </tr>
+    <tr>
+      <th><a href="https://gngsn.tistory.com/137">Docker Network, 제대로 이해하기 (1)</a>&nbsp;&nbsp;<span>(3)</span></th>
+      <td>2022.02.09</td>
+    </tr>
+    <tr>
+      <th><a href="https://gngsn.tistory.com/129">Docker Engine, 제대로 이해하기 (2)</a>&nbsp;&nbsp;<span>(0)</span></th>
+      <td>2022.01.20</td>
+    </tr>
+  </tbody></table></div>
+</div>
+
+<!-- PostListinCategory - END -->
+
+
+        <div class="article_namecard">
+          <img src="./Docker Engine, 제대로 이해하기 (1)_files/43839834">
+          <div class="intro">
+          <div>
+            <p class="role">Backend Software Engineer</p>
+            <a class="name" target="_blank" href="https://github.com/gngsn">𝐒𝐮𝐧 <span style="color: #c8c8c8">· 𝙂𝙮𝙚𝙤𝙣𝙜𝙨𝙪𝙣 𝙋𝙖𝙧𝙠</span></a>
+          </div>
+          <div>
+            <div style="display: flex; align-items: center">
+            <a target="_blank" href="https://github.com/gngsn">Github</a>
+            <span style="color: #DDD">&nbsp; / &nbsp;</span>
+            <a href="https://www.linkedin.com/in/kyeongsun-park">LinkedIn</a>
+            </div>
+            <a target="_blank" href="https://gyeongsun.com/">gyeongsun.com</a>
+          </div>
+          </div>
+          </div>
+        </div>
+        </div>
+
+        <!-- article_content -->
+        <div class="article_content">
+          <!-- <ul class="list_share list_sns">
+                                  <li class="item_share"><a href="#" class="link_share link_facebook" data-service="facebook"><span class="icon-Facebook"></span><span class="blind">페이스북</span></a></li>
+                                  <li class="item_share"><a href="#" class="link_share link_twitter" data-service="twitter"><span class="icon-Twitter"></span><span class="blind">트위터</span></a></li>
+                                  <li class="item_share"><a href="#" class="link_share link_story" data-service="kakaostory"><span class="icon-Story"></span><span class="blind">카카오스토리</span></a></li>
+                                  <li class="item_share"><a href="#" class="link_share link_kakao" data-service="kakaotalk"><span class="icon-Kakao"></span><span class="blind">카카오톡</span></a></li>
+                              </ul> -->
+          
+
+          
+            <!-- area_related -->
+            <div class="area_related">
+              <h3 class="title_related">관련글</h3>
+              <ul class="list_related">
+                
+                  <li class="item_related">
+                    <a href="https://gngsn.tistory.com/268?category=1192265" class="link_related">
+                      <span class="thumnail item-thumbnail" style="background-image:url(&#39;https://img1.daumcdn.net/thumb/R750x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FeoLWwn%2FbtsyD70gRZ5%2FAAAAAAAAAAAAAAAAAAAAAHzxB7Z8Ya3vCApejXLY2H_4n-X6bztXuEN1-H3dMA0f%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DJEF6RoFESi2Pxc00pEBa3OkKB1w%253D&#39;)"></span>
+                      <div class="box_content">
+                        <strong>Docker, 제대로 사용하기 - Commands</strong>
+                        <span class="info">2023.10.17</span>
+                      </div>
+                    </a>
+                  </li>
+                
+                  <li class="item_related">
+                    <a href="https://gngsn.tistory.com/140?category=1192265" class="link_related">
+                      <span class="thumnail item-thumbnail" style="background-image:url(&#39;https://img1.daumcdn.net/thumb/R750x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FbT1gCZ%2FbtrtlTGFqs0%2FAAAAAAAAAAAAAAAAAAAAANqqFUAHzGseZs855M9bnKyhgAuLy23gRgEq9g2Jxjlb%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DEhqalrtqp%252FvzeHVMDWgEgSMW%252Bm0%253D&#39;)"></span>
+                      <div class="box_content">
+                        <strong>Docker Network, 제대로 이해하기 (2)</strong>
+                        <span class="info">2022.02.15</span>
+                      </div>
+                    </a>
+                  </li>
+                
+                  <li class="item_related">
+                    <a href="https://gngsn.tistory.com/137?category=1192265" class="link_related">
+                      <span class="thumnail item-thumbnail" style="background-image:url(&#39;https://img1.daumcdn.net/thumb/R750x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FLB8vH%2FbtrsW9oaxl9%2FAAAAAAAAAAAAAAAAAAAAABFTobhoCMHwNNqcn0h0LSjU3qSXcFyegyziaQpO5XGT%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3Dth22WPFrf3%252FiOk29sDG2pkfCy4M%253D&#39;)"></span>
+                      <div class="box_content">
+                        <strong>Docker Network, 제대로 이해하기 (1)</strong>
+                        <span class="info">2022.02.09</span>
+                      </div>
+                    </a>
+                  </li>
+                
+                  <li class="item_related">
+                    <a href="https://gngsn.tistory.com/129?category=1192265" class="link_related">
+                      <span class="thumnail item-thumbnail" style="background-image:url(&#39;https://img1.daumcdn.net/thumb/R750x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2Fbz0eyg%2FbtrrhR4lS9s%2FAAAAAAAAAAAAAAAAAAAAAHnwMVb2YFRjLrFBtaRbzKmA5oaCmb3u-KEmX4qd6Icj%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3DAiDp7KqpN0RLTsHCcdET%252FRRjgHo%253D&#39;)"></span>
+                      <div class="box_content">
+                        <strong>Docker Engine, 제대로 이해하기 (2)</strong>
+                        <span class="info">2022.01.20</span>
+                      </div>
+                    </a>
+                  </li>
+                
+              </ul>
+            </div>
+            <!-- // area_related -->
+          
+
+          <!-- area_reply -->
+          <div class="area_reply">
+
+            <div class="box_reply_info">
+              <a href="https://gngsn.tistory.com/128#rp" onclick="" class="reply_events">댓글 <span>14</span></a>
+            </div>
+
+            <!-- reply_content -->
+            <div class="reply_content">
+              <button type="button" class="btn_more btn_replymore" style="display:none;">+ 이전 댓글 더보기</button>
+
+              <div data-tistory-react-app="Namecard"><div class="tt_box_namecard"><div class="tt_cont"><a class="tt_tit_cont" href="https://gngsn.tistory.com/">ENFJ.dev</a><a class="tt_desc" href="https://gngsn.tistory.com/">gngsn 님의 블로그입니다.</a><button class="tt_btn_subscribe" data-tiara-action-name="프로필영역 구독 버튼_클릭" data-tiara-copy="구독하기" type="button"><span class="tt_txt_g">구독하기</span><span class="tt_img_area_reply tt_ico_cross"></span></button></div><a class="tt_wrap_thumb" href="https://gngsn.tistory.com/"><span class="tt_thumb_g" style="background-image: url(&quot;https://img1.daumcdn.net/thumb/S56x56/?scode=mtistory2&amp;fname=https%3A%2F%2Ftistory1.daumcdn.net%2Ftistory%2F3172059%2Fattach%2F3e56f2f1e68c446d96086aa70aa9d34f&quot;);"></span></a><div class="google-auto-placed" style="width: 100%; height: auto; clear: none; text-align: center;"><ins data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-4553219130656487" data-adsbygoogle-status="done" style="display: block; margin: 10px auto; background-color: transparent; height: 280px;"><div id="aswift_3_host" style="border: none; height: 280px; width: 663px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"></div></ins></div></div></div><div id="entry128Comment">
+                <!-- box_comment_list -->
+                <div class="box_comment_list">
+                  
+                    <ul class="list_reply">
+                                  
+
+            <li id="comment15904803" class="item_reply rp_general">
+                          <div class="thumbnail_reply">
+                            <img src="./Docker Engine, 제대로 이해하기 (1)_files/saved_resource" width="50" height="50" alt="프로필사진">
+                          </div>
+                          <div class="box_reply_content">
+                            <div class="user">gayuna<span class="date"><span class="dot">ㆍ </span>2022.02.08 23:44 <a href="https://gngsn.tistory.com/toolbar/popup/abuseReport/?entryId=128&amp;commentId=15904803" onclick="window.open(this.href, &#39;ThisBlogReportPopup&#39;, &#39;width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no&#39;); return false;">신고</a></span></div>
+                            <p class="txt">딱 제가 찾던 내용이에요!! 직접 파야 했는데 너무 명확하게 정리해주셔서 속이 다 시원하네요 감사합니다!</p>
+                            <div class="modify">
+                              <a href="https://gngsn.tistory.com/128#" onclick="deleteComment(15904803);return false">수정/삭제</a><span class="slash">I</span><a href="https://gngsn.tistory.com/128#" onclick=" commentComment(15904803);return false">답글</a>
+                            </div>
+                          </div>
+
+                          
+                            <!-- list_reply_comment -->
+                            <ul class="list_reply_comment">
+                              
+                                <li id="comment15905268" class="item_comment reply rp_admin">
+                                  <div class="ico_commnent">ㄴ</div>
+                                  <div class="thumbnail_reply">
+                                    <img src="./Docker Engine, 제대로 이해하기 (1)_files/profile_default_07.png" width="50" height="50" alt="프로필사진">
+                                  </div>
+                                  <div class="box_reply_content">
+                                    <div class="user"><a class="link_name"></a><a href="https://gngsn.tistory.com/" onclick="return openLinkInNewWindow(this)">gngsn</a><span class="tistoryProfileLayerTrigger" onclick="TistoryProfile.show(event, this, {&quot;blogId&quot;:3172059,&quot;title&quot;:&quot;ENFJ.dev&quot;,&quot;url&quot;:&quot;https://gngsn.tistory.com&quot;,&quot;nickname&quot;:&quot;gngsn&quot;,&quot;items&quot;:[],&quot;isSubscriber&quot;:false,&quot;device&quot;:&quot;web_pc&quot;}); return false;"></span><span class="date"><span class="dot">ㆍ </span>2022.02.09 12:26 <a href="https://gngsn.tistory.com/toolbar/popup/abuseReport/?entryId=128&amp;commentId=15905268" onclick="window.open(this.href, &#39;ThisBlogReportPopup&#39;, &#39;width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no&#39;); return false;">신고</a></span></div>
+                                    <p class="txt">한글 자료가 거의 없어서 더 그러더라구요,,ㅎㅎ 도움이 되었다니 저도 기분이 좋네요 :) 댓글 감사합니다! </p>
+                                    <div class="modify">
+                                      <a href="https://gngsn.tistory.com/128#" onclick="deleteComment(15905268);return false">수정/삭제</a>
+                                    </div>
+                                  </div>
+                                </li>
+                              
+                            </ul>
+                            <!-- // list_reply_comment -->
+                          
+                        </li><li id="comment16133433" class="item_reply rp_general">
+                          <div class="thumbnail_reply">
+                            <img src="./Docker Engine, 제대로 이해하기 (1)_files/saved_resource(1)" width="50" height="50" alt="프로필사진">
+                          </div>
+                          <div class="box_reply_content">
+                            <div class="user">containerd<span class="date"><span class="dot">ㆍ </span>2022.08.17 11:18 <a href="https://gngsn.tistory.com/toolbar/popup/abuseReport/?entryId=128&amp;commentId=16133433" onclick="window.open(this.href, &#39;ThisBlogReportPopup&#39;, &#39;width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no&#39;); return false;">신고</a></span></div>
+                            <p class="txt">도커에 대한 정리.. 사랑합니다</p>
+                            <div class="modify">
+                              <a href="https://gngsn.tistory.com/128#" onclick="deleteComment(16133433);return false">수정/삭제</a><span class="slash">I</span><a href="https://gngsn.tistory.com/128#" onclick=" commentComment(16133433);return false">답글</a>
+                            </div>
+                          </div>
+
+                          
+                            <!-- list_reply_comment -->
+                            <ul class="list_reply_comment">
+                              
+                                <li id="comment16134071" class="item_comment reply rp_admin">
+                                  <div class="ico_commnent">ㄴ</div>
+                                  <div class="thumbnail_reply">
+                                    <img src="./Docker Engine, 제대로 이해하기 (1)_files/profile_default_07.png" width="50" height="50" alt="프로필사진">
+                                  </div>
+                                  <div class="box_reply_content">
+                                    <div class="user"><a class="link_name"></a><a href="https://gngsn.tistory.com/" onclick="return openLinkInNewWindow(this)">gngsn</a><span class="tistoryProfileLayerTrigger" onclick="TistoryProfile.show(event, this, {&quot;blogId&quot;:3172059,&quot;title&quot;:&quot;ENFJ.dev&quot;,&quot;url&quot;:&quot;https://gngsn.tistory.com&quot;,&quot;nickname&quot;:&quot;gngsn&quot;,&quot;items&quot;:[],&quot;isSubscriber&quot;:false,&quot;device&quot;:&quot;web_pc&quot;}); return false;"></span><span class="date"><span class="dot">ㆍ </span>2022.08.17 18:51 <a href="https://gngsn.tistory.com/toolbar/popup/abuseReport/?entryId=128&amp;commentId=16134071" onclick="window.open(this.href, &#39;ThisBlogReportPopup&#39;, &#39;width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no&#39;); return false;">신고</a></span></div>
+                                    <p class="txt">😊</p>
+                                    <div class="modify">
+                                      <a href="https://gngsn.tistory.com/128#" onclick="deleteComment(16134071);return false">수정/삭제</a>
+                                    </div>
+                                  </div>
+                                </li>
+                              
+                            </ul>
+                            <!-- // list_reply_comment -->
+                          
+                        </li><li id="comment16142707" class="item_reply rp_secret hiddenComment">
+                          <div class="thumbnail_reply">
+                            <img src="./Docker Engine, 제대로 이해하기 (1)_files/saved_resource" width="50" height="50" alt="프로필사진">
+                          </div>
+                          <div class="box_reply_content">
+                            <div class="user">익명<span class="date"><span class="dot">ㆍ </span>2022.08.23 17:34</span></div>
+                            <p class="txt">비밀댓글입니다.</p>
+                            <div class="modify">
+                              <a href="https://gngsn.tistory.com/128#" onclick="deleteComment(16142707);return false">수정/삭제</a><span class="slash">I</span><a href="https://gngsn.tistory.com/128#" onclick=" commentComment(16142707);return false">답글</a>
+                            </div>
+                          </div>
+
+                          
+                            <!-- list_reply_comment -->
+                            <ul class="list_reply_comment">
+                              
+                                <li id="comment16142783" class="item_comment reply rp_secret hiddenComment">
+                                  <div class="ico_commnent">ㄴ</div>
+                                  <div class="thumbnail_reply">
+                                    <img src="./Docker Engine, 제대로 이해하기 (1)_files/profile_default_07.png" width="50" height="50" alt="프로필사진">
+                                  </div>
+                                  <div class="box_reply_content">
+                                    <div class="user"><a class="link_name">익명</a><span class="date"><span class="dot">ㆍ </span>2022.08.23 18:38</span></div>
+                                    <p class="txt">비밀댓글입니다.</p>
+                                    <div class="modify">
+                                      <a href="https://gngsn.tistory.com/128#" onclick="deleteComment(16142783);return false">수정/삭제</a>
+                                    </div>
+                                  </div>
+                                </li>
+                              
+                            </ul>
+                            <!-- // list_reply_comment -->
+                          
+                        </li><li id="comment16601134" class="item_reply rp_general">
+                          <div class="thumbnail_reply">
+                            <img src="./Docker Engine, 제대로 이해하기 (1)_files/saved_resource(2)" width="50" height="50" alt="프로필사진">
+                          </div>
+                          <div class="box_reply_content">
+                            <div class="user"><a href="https://roeniss.tistory.com/" onclick="return openLinkInNewWindow(this)">팽펑</a><span class="tistoryProfileLayerTrigger" onclick="TistoryProfile.show(event, this, null); return false;"></span><span class="date"><span class="dot">ㆍ </span>2023.04.02 03:09 <a href="https://gngsn.tistory.com/toolbar/popup/abuseReport/?entryId=128&amp;commentId=16601134" onclick="window.open(this.href, &#39;ThisBlogReportPopup&#39;, &#39;width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no&#39;); return false;">신고</a></span></div>
+                            <p class="txt">너무 좋네요. 잘 읽었습니다.</p>
+                            <div class="modify">
+                              <a href="https://gngsn.tistory.com/128#" onclick="deleteComment(16601134);return false">수정/삭제</a><span class="slash">I</span><a href="https://gngsn.tistory.com/128#" onclick=" commentComment(16601134);return false">답글</a>
+                            </div>
+                          </div>
+
+                          
+                            <!-- list_reply_comment -->
+                            <ul class="list_reply_comment">
+                              
+                                <li id="comment16602766" class="item_comment reply rp_admin">
+                                  <div class="ico_commnent">ㄴ</div>
+                                  <div class="thumbnail_reply">
+                                    <img src="./Docker Engine, 제대로 이해하기 (1)_files/profile_default_07.png" width="50" height="50" alt="프로필사진">
+                                  </div>
+                                  <div class="box_reply_content">
+                                    <div class="user"><a class="link_name"></a><a href="https://gngsn.tistory.com/" onclick="return openLinkInNewWindow(this)">gngsn</a><span class="tistoryProfileLayerTrigger" onclick="TistoryProfile.show(event, this, {&quot;blogId&quot;:3172059,&quot;title&quot;:&quot;ENFJ.dev&quot;,&quot;url&quot;:&quot;https://gngsn.tistory.com&quot;,&quot;nickname&quot;:&quot;gngsn&quot;,&quot;items&quot;:[],&quot;isSubscriber&quot;:false,&quot;device&quot;:&quot;web_pc&quot;}); return false;"></span><span class="date"><span class="dot">ㆍ </span>2023.04.02 15:52 <a href="https://gngsn.tistory.com/toolbar/popup/abuseReport/?entryId=128&amp;commentId=16602766" onclick="window.open(this.href, &#39;ThisBlogReportPopup&#39;, &#39;width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no&#39;); return false;">신고</a></span></div>
+                                    <p class="txt">댓글 감사합니다 :)</p>
+                                    <div class="modify">
+                                      <a href="https://gngsn.tistory.com/128#" onclick="deleteComment(16602766);return false">수정/삭제</a>
+                                    </div>
+                                  </div>
+                                </li>
+                              
+                            </ul>
+                            <!-- // list_reply_comment -->
+                          
+                        </li><li id="comment16866776" class="item_reply rp_general">
+                          <div class="thumbnail_reply">
+                            <img src="./Docker Engine, 제대로 이해하기 (1)_files/saved_resource" width="50" height="50" alt="프로필사진">
+                          </div>
+                          <div class="box_reply_content">
+                            <div class="user">ㅎㅎ<span class="date"><span class="dot">ㆍ </span>2023.05.28 16:24 <a href="https://gngsn.tistory.com/toolbar/popup/abuseReport/?entryId=128&amp;commentId=16866776" onclick="window.open(this.href, &#39;ThisBlogReportPopup&#39;, &#39;width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no&#39;); return false;">신고</a></span></div>
+                            <p class="txt">잘 읽었습니다. 감사합니다.</p>
+                            <div class="modify">
+                              <a href="https://gngsn.tistory.com/128#" onclick="deleteComment(16866776);return false">수정/삭제</a><span class="slash">I</span><a href="https://gngsn.tistory.com/128#" onclick=" commentComment(16866776);return false">답글</a>
+                            </div>
+                          </div>
+
+                          
+                            <!-- list_reply_comment -->
+                            <ul class="list_reply_comment">
+                              
+                                <li id="comment16867079" class="item_comment reply rp_admin">
+                                  <div class="ico_commnent">ㄴ</div>
+                                  <div class="thumbnail_reply">
+                                    <img src="./Docker Engine, 제대로 이해하기 (1)_files/profile_default_07.png" width="50" height="50" alt="프로필사진">
+                                  </div>
+                                  <div class="box_reply_content">
+                                    <div class="user"><a class="link_name"></a><a href="https://gngsn.tistory.com/" onclick="return openLinkInNewWindow(this)">gngsn</a><span class="tistoryProfileLayerTrigger" onclick="TistoryProfile.show(event, this, {&quot;blogId&quot;:3172059,&quot;title&quot;:&quot;ENFJ.dev&quot;,&quot;url&quot;:&quot;https://gngsn.tistory.com&quot;,&quot;nickname&quot;:&quot;gngsn&quot;,&quot;items&quot;:[],&quot;isSubscriber&quot;:false,&quot;device&quot;:&quot;web_pc&quot;}); return false;"></span><span class="date"><span class="dot">ㆍ </span>2023.05.28 17:14 <a href="https://gngsn.tistory.com/toolbar/popup/abuseReport/?entryId=128&amp;commentId=16867079" onclick="window.open(this.href, &#39;ThisBlogReportPopup&#39;, &#39;width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no&#39;); return false;">신고</a></span></div>
+                                    <p class="txt">감사합니다 :)</p>
+                                    <div class="modify">
+                                      <a href="https://gngsn.tistory.com/128#" onclick="deleteComment(16867079);return false">수정/삭제</a>
+                                    </div>
+                                  </div>
+                                </li>
+                              
+                            </ul>
+                            <!-- // list_reply_comment -->
+                          
+                        </li><li id="comment18829450" class="item_reply rp_general">
+                          <div class="thumbnail_reply">
+                            <img src="./Docker Engine, 제대로 이해하기 (1)_files/saved_resource(3)" width="50" height="50" alt="프로필사진">
+                          </div>
+                          <div class="box_reply_content">
+                            <div class="user"><a href="https://infj-dev.tistory.com/" onclick="return openLinkInNewWindow(this)">infj_dev</a><span class="tistoryProfileLayerTrigger" onclick="TistoryProfile.show(event, this, null); return false;"></span><span class="date"><span class="dot">ㆍ </span>2024.03.05 22:06 <a href="https://gngsn.tistory.com/toolbar/popup/abuseReport/?entryId=128&amp;commentId=18829450" onclick="window.open(this.href, &#39;ThisBlogReportPopup&#39;, &#39;width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no&#39;); return false;">신고</a></span></div>
+                            <p class="txt">잘 정리해주셔서 감사합니다!</p>
+                            <div class="modify">
+                              <a href="https://gngsn.tistory.com/128#" onclick="deleteComment(18829450);return false">수정/삭제</a><span class="slash">I</span><a href="https://gngsn.tistory.com/128#" onclick=" commentComment(18829450);return false">답글</a>
+                            </div>
+                          </div>
+
+                          
+                            <!-- list_reply_comment -->
+                            <ul class="list_reply_comment">
+                              
+                                <li id="comment18829838" class="item_comment reply rp_admin">
+                                  <div class="ico_commnent">ㄴ</div>
+                                  <div class="thumbnail_reply">
+                                    <img src="./Docker Engine, 제대로 이해하기 (1)_files/profile_default_07.png" width="50" height="50" alt="프로필사진">
+                                  </div>
+                                  <div class="box_reply_content">
+                                    <div class="user"><a class="link_name"></a><a href="https://gngsn.tistory.com/" onclick="return openLinkInNewWindow(this)">gngsn</a><span class="tistoryProfileLayerTrigger" onclick="TistoryProfile.show(event, this, {&quot;blogId&quot;:3172059,&quot;title&quot;:&quot;ENFJ.dev&quot;,&quot;url&quot;:&quot;https://gngsn.tistory.com&quot;,&quot;nickname&quot;:&quot;gngsn&quot;,&quot;items&quot;:[],&quot;isSubscriber&quot;:false,&quot;device&quot;:&quot;web_pc&quot;}); return false;"></span><span class="date"><span class="dot">ㆍ </span>2024.03.05 23:02 <a href="https://gngsn.tistory.com/toolbar/popup/abuseReport/?entryId=128&amp;commentId=18829838" onclick="window.open(this.href, &#39;ThisBlogReportPopup&#39;, &#39;width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no&#39;); return false;">신고</a></span></div>
+                                    <p class="txt">댓글 감사합니다 :)</p>
+                                    <div class="modify">
+                                      <a href="https://gngsn.tistory.com/128#" onclick="deleteComment(18829838);return false">수정/삭제</a>
+                                    </div>
+                                  </div>
+                                </li>
+                              
+                            </ul>
+                            <!-- // list_reply_comment -->
+                          
+                        </li><li id="comment21396259" class="item_reply rp_general">
+                          <div class="thumbnail_reply">
+                            <img src="./Docker Engine, 제대로 이해하기 (1)_files/saved_resource(4)" width="50" height="50" alt="프로필사진">
+                          </div>
+                          <div class="box_reply_content">
+                            <div class="user">행보칼수업서<span class="date"><span class="dot">ㆍ </span>2024.10.17 11:38 <a href="https://gngsn.tistory.com/toolbar/popup/abuseReport/?entryId=128&amp;commentId=21396259" onclick="window.open(this.href, &#39;ThisBlogReportPopup&#39;, &#39;width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no&#39;); return false;">신고</a></span></div>
+                            <p class="txt">대박
+<br>존경스럽습니다. 포스팅 잘 봤습니다</p>
+                            <div class="modify">
+                              <a href="https://gngsn.tistory.com/128#" onclick="deleteComment(21396259);return false">수정/삭제</a><span class="slash">I</span><a href="https://gngsn.tistory.com/128#" onclick=" commentComment(21396259);return false">답글</a>
+                            </div>
+                          </div>
+
+                          
+                        </li><li id="comment22519003" class="item_reply rp_general">
+                          <div class="thumbnail_reply">
+                            <img src="./Docker Engine, 제대로 이해하기 (1)_files/saved_resource(5)" width="50" height="50" alt="프로필사진">
+                          </div>
+                          <div class="box_reply_content">
+                            <div class="user"><a href="https://eunsunny.tistory.com/" onclick="return openLinkInNewWindow(this)">eunbesu</a><span class="tistoryProfileLayerTrigger" onclick="TistoryProfile.show(event, this, null); return false;"></span><span class="date"><span class="dot">ㆍ </span>2025.02.08 10:55 <a href="https://gngsn.tistory.com/toolbar/popup/abuseReport/?entryId=128&amp;commentId=22519003" onclick="window.open(this.href, &#39;ThisBlogReportPopup&#39;, &#39;width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no&#39;); return false;">신고</a></span></div>
+                            <p class="txt">잘봤습니다. 감사합니다.</p>
+                            <div class="modify">
+                              <a href="https://gngsn.tistory.com/128#" onclick="deleteComment(22519003);return false">수정/삭제</a><span class="slash">I</span><a href="https://gngsn.tistory.com/128#" onclick=" commentComment(22519003);return false">답글</a>
+                            </div>
+                          </div>
+
+                          
+                        </li><li id="none_display_division_for_comment_list_128" style="display: none;"></li>
+<script type="text/javascript">
+    setInitialEntryComments(128, 1755129567)
+</script>
+                    </ul>
+                  
+                </div>
+                <!-- // box_comment_list -->
+
+                <form method="post" action="https://gngsn.tistory.com/comment/add/128" onsubmit="return false" style="margin: 0">
+    
+      <!-- reply_write -->
+      
+        <div class="reply_write">
+          
+            
+              <div class="form_guest">
+                <!-- name -->
+                <div class="box_inp">
+                  <div class="inner_inp">
+                    <input type="text" name="name" value="" title="이름" placeholder="이름" class="inp_comment inp_name">
+                  </div>
+                </div>
+                <!-- password -->
+                <div class="box_inp">
+                  <div class="inner_inp">
+                    <input type="password" name="password" value="" title="비밀번호" maxlength="12" placeholder="비밀번호" class="inp_comment inp_password">
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="form_content">
+            <textarea id="comment" name="comment" placeholder="댓글을 입력해주세요."></textarea>
+          </div>
+
+          <div class="form_reg thema_apply">
+            <label><input type="checkbox" name="secret"> 비공개</label>
+            <button type="button" class="btn_register" onclick="addComment(this, 128); return false;">댓글 남기기</button>
+          </div>
+
+        </div>
+      </form>
+      <!-- // reply_write -->
+    
+
+              </div>
+<script type="text/javascript">loadedComments[128]=true;
+findFragmentAndHighlight(128);</script>
+
+
+            </div>
+            <!-- // reply_content -->
+
+          </div>
+          <!-- // area_reply -->
+        </div>
+        <!-- // article_content -->
+
+      </div>
+      <!-- article_content -->
+
+
+    
+  
+              
+          
+      </main></div>
+      <!-- // area_view -->
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+    
+
+    </div>
+    <!-- // container -->
+
+    <!-- footer -->
+    <footer id="footer">
+      <div class="inner_footer">
+        
+          <a href="https://gngsn.tistory.com/" class="link_footer">Pageseo</a>
+        
+        
+          <a href="https://github.com/gngsn" class="link_footer">Github</a>
+        
+        
+          <a href="https://www.instagram.com/pppppppppark/" class="link_footer">Instagram</a>
+        
+        
+      </div>
+      <div>
+        <address>© 2020 TISTORY. All rights reserved.</address>
+      </div>
+
+    </footer>
+    <!-- // footer -->
+
+    
+    <!-- // wrap -->
+  
+<div class="#menubar menu_toolbar toolbar_lb">
+  <h2 class="screen_out">티스토리툴바</h2>
+<div class="btn_tool"><button class="btn_menu_toolbar btn_subscription #subscribe" data-blog-id="3172059" data-url="https://gngsn.tistory.com" data-device="web_pc" data-tiara-copy="구독하기"><strong class="txt_tool_id">ENFJ.dev</strong><em class="txt_state">구독하기</em><span class="img_common_tistory ico_check_type1"></span></button></div></div>
+<div class="#menubar menu_toolbar toolbar_lb"></div>
+<div class="layer_tooltip">
+  <div class="inner_layer_tooltip">
+    <p class="desc_g"></p>
+  </div>
+</div>
+<div id="editEntry" style="position:absolute;width:1px;height:1px;left:-100px;top:-100px"></div>
+
+
+                        <!-- CallBack - START -->
+        <script>                    (function () { 
+                        var blogTitle = 'ENFJ.dev';
+                        
+                        (function () {
+    function isShortContents () {
+        return window.getSelection().toString().length < 30;
+    }
+    function isCommentLink (elementID) {
+        return elementID === 'commentLinkClipboardInput'
+    }
+
+    function copyWithSource (event) {
+        if (isShortContents() || isCommentLink(event.target.id)) {
+            return;
+        }
+        var range = window.getSelection().getRangeAt(0);
+        var contents = range.cloneContents();
+        var temp = document.createElement('div');
+
+        temp.appendChild(contents);
+
+        var url = document.location.href;
+        var decodedUrl = decodeURI(url);
+        var postfix = ' [' + blogTitle + ':티스토리]';
+
+        event.clipboardData.setData('text/plain', temp.innerText + '\n출처: ' + decodedUrl + postfix);
+        event.clipboardData.setData('text/html', '<pre data-ke-type="codeblock">' + temp.innerHTML + '</pre>' + '출처: <a href="' + url + '">' + decodedUrl + '</a>' + postfix);
+        event.preventDefault();
+    }
+
+    document.addEventListener('copy', copyWithSource);
+})()
+
+                    })()</script>
+
+        <!-- CallBack - END -->
+
+<!-- DragSearchHandler - START -->
+<script src="./Docker Engine, 제대로 이해하기 (1)_files/search_dragselection.min.js"></script>
+
+<!-- DragSearchHandler - END -->
+
+                
+                <div style="margin:0; padding:0; border:none; background:none; float:none; clear:none; z-index:0"></div>
+<script type="text/javascript" src="./Docker Engine, 제대로 이해하기 (1)_files/common(1).js"></script>
+<script type="text/javascript">window.roosevelt_params_queue = window.roosevelt_params_queue || [{channel_id: 'dk', channel_label: '{tistory}'}]</script>
+<script type="text/javascript" src="./Docker Engine, 제대로 이해하기 (1)_files/roosevelt_dk_bt.js" async="async"></script>
+
+                
+                <script>window.tiara = {"svcDomain":"user.tistory.com","section":"글뷰","trackPage":"글뷰_보기","page":"글뷰","key":"3172059-128","customProps":{"userId":"0","blogId":"3172059","entryId":"128","role":"guest","trackPage":"글뷰_보기","filterTarget":false},"entry":{"entryId":"128","entryTitle":"Docker Engine, 제대로 이해하기 (1)","entryType":"POST","categoryName":"BACKEND/Docker & Kubernetes","categoryId":"1192265","serviceCategoryName":null,"serviceCategoryId":null,"author":"3815497","authorNickname":"gngsn","blogNmae":"ENFJ.dev","image":"kage@nLBTy/btseH0SSSyQ/MGRDLUNQE3khGwDIbMoF10","plink":"/128","tags":[]},"kakaoAppKey":"3e6ddd834b023f24221217e370daed18","appUserId":"null"}</script>
+<script type="module" src="./Docker Engine, 제대로 이해하기 (1)_files/index(1).js"></script>
+<script src="./Docker Engine, 제대로 이해하기 (1)_files/polyfills-legacy(1).js" nomodule="true" defer="true"></script>
+<script src="./Docker Engine, 제대로 이해하기 (1)_files/index-legacy(1).js" nomodule="true" defer="true"></script>
+
+                
+<script>
+  $('.article_view').find('table').each(function (idx, el) {
+    $(el).wrap('<div class="table-overflow">')
+  });
+
+	$(function() {
+  	$("body").prognroll();
+  });
+</script>
+
+<script src="./Docker Engine, 제대로 이해하기 (1)_files/toc.js"></script>
+<script src="./Docker Engine, 제대로 이해하기 (1)_files/prognroll.js"></script>
+<script type="text/x-mathjax-config;executed=true"> MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], processEscapes: true } }); </script> <script src="./Docker Engine, 제대로 이해하기 (1)_files/MathJax.js"></script>
+
+
+<ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;" data-ad-status="unfilled"><div id="aswift_0_host" style="border: none; height: 0px; width: 0px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"><iframe id="aswift_0" name="aswift_0" browsingtopics="true" style="left:0;position:absolute;top:0;border:0;width:undefinedpx;height:undefinedpx;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="./Docker Engine, 제대로 이해하기 (1)_files/ads.html" data-google-container-id="a!1" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins><div id="__phocus__" class="__phocus__" tabindex="-1"></div><div id="shortcutLayer" class="doc_help" style="display: none;"><button class="btn_doc_close">닫기</button>
+  <h2 class="title">단축키</h2>
+  <div class="content mac_platform">
+    <div class="container">
+      <h3 class="item_title">내 블로그</h3>
+      <table class="item">
+        <tbody>
+        
+    <tr>
+      <th>내 블로그 - 관리자 홈 전환</th>
+      <td>
+        <div class="pc">
+          <kbd>Q</kbd>
+        </div>
+        <div class="mac">
+          <kbd>Q</kbd>
+        </div>
+      </td>
+    </tr>
+  
+        
+    <tr>
+      <th>새 글 쓰기</th>
+      <td>
+        <div class="pc">
+          <kbd>W</kbd>
+        </div>
+        <div class="mac">
+          <kbd>W</kbd>
+        </div>
+      </td>
+    </tr>
+  
+        </tbody>
+      </table>
+      <h3 class="item_title">블로그 게시글</h3>
+      <table class="item">
+        <tbody>
+        
+    <tr>
+      <th>글 수정 (권한 있는 경우)</th>
+      <td>
+        <div class="pc">
+          <kbd>E</kbd>
+        </div>
+        <div class="mac">
+          <kbd>E</kbd>
+        </div>
+      </td>
+    </tr>
+  
+        
+    <tr>
+      <th>댓글 영역으로 이동</th>
+      <td>
+        <div class="pc">
+          <kbd>C</kbd>
+        </div>
+        <div class="mac">
+          <kbd>C</kbd>
+        </div>
+      </td>
+    </tr>
+  
+        </tbody>
+      </table>
+    </div>
+    <div class="container">
+      <h3 class="item_title">모든 영역</h3>
+      <table class="item">
+        <tbody>
+        
+    <tr>
+      <th>이 페이지의 URL 복사</th>
+      <td>
+        <div class="pc">
+          <kbd>S</kbd>
+        </div>
+        <div class="mac">
+          <kbd>S</kbd>
+        </div>
+      </td>
+    </tr>
+  
+        
+    <tr>
+      <th>맨 위로 이동</th>
+      <td>
+        <div class="pc">
+          <kbd>T</kbd>
+        </div>
+        <div class="mac">
+          <kbd>T</kbd>
+        </div>
+      </td>
+    </tr>
+  
+        
+    <tr>
+      <th>티스토리 홈 이동</th>
+      <td>
+        <div class="pc">
+          <kbd>H</kbd>
+        </div>
+        <div class="mac">
+          <kbd>H</kbd>
+        </div>
+      </td>
+    </tr>
+  
+        
+    <tr>
+      <th>단축키 안내</th>
+      <td>
+        <div class="pc">
+          <kbd>Shift</kbd> + <kbd>/</kbd>
+        </div>
+        <div class="mac">
+          <kbd>⇧</kbd> + <kbd>/</kbd>
+        </div>
+      </td>
+    </tr>
+  
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <p class="info">* 단축키는 한글/영문 대소문자로 이용 가능하며, 티스토리 기본 도메인에서만 동작합니다.</p>
+  </div><iframe name="googlefcPresent" style="display: none; width: 0px; height: 0px; border: none; z-index: -1000; left: -1000px; top: -1000px;" src="./Docker Engine, 제대로 이해하기 (1)_files/saved_resource(6).html"></iframe><iframe name="__tcfapiLocator" src="./Docker Engine, 제대로 이해하기 (1)_files/saved_resource(7).html" style="display: none; width: 0px; height: 0px; border: none; z-index: -1000; left: -1000px; top: -1000px;"></iframe><iframe name="googlefcInactive" src="./Docker Engine, 제대로 이해하기 (1)_files/saved_resource(8).html" style="display: none; width: 0px; height: 0px; border: none; z-index: -1000; left: -1000px; top: -1000px;"></iframe><iframe name="googlefcLoaded" src="./Docker Engine, 제대로 이해하기 (1)_files/saved_resource(9).html" style="display: none; width: 0px; height: 0px; border: none; z-index: -1000; left: -1000px; top: -1000px;"></iframe><iframe src="./Docker Engine, 제대로 이해하기 (1)_files/aframe.html" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="./Docker Engine, 제대로 이해하기 (1)_files/zrt_lookup_fy2021.html" style="display: none;"></iframe><ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important; width: 100vw !important; height: 100vh !important; inset: 0px auto auto 0px !important; clear: none !important; float: none !important; margin: 0px !important; max-height: none !important; max-width: none !important; opacity: 1 !important; overflow: visible !important; padding: 0px !important; position: fixed !important; vertical-align: baseline !important; visibility: visible !important; z-index: 2147483647 !important; background: transparent !important;" aria-hidden="true" data-ad-status="filled" data-vignette-loaded="true" tabindex="0"><div id="aswift_4_host" style="border: none !important; height: 100vh !important; width: 100vw !important; margin: 0px !important; padding: 0px !important; position: relative !important; visibility: visible !important; background-color: transparent !important; display: inline-block !important; inset: auto !important; clear: none !important; float: none !important; max-height: none !important; max-width: none !important; opacity: 1 !important; overflow: visible !important; vertical-align: baseline !important; z-index: auto !important;"><iframe id="aswift_4" name="aswift_4" browsingtopics="true" style="min-height: auto !important; max-height: none !important; min-width: auto !important; max-width: none !important; width: 100vw !important; height: 100vh !important; inset: 0px auto auto 0px !important; position: absolute !important; clear: none !important; display: inline !important; float: none !important; margin: 0px !important; opacity: 1 !important; overflow: visible !important; padding: 0px !important; vertical-align: baseline !important; visibility: visible !important; z-index: auto !important;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="" height="" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="./Docker Engine, 제대로 이해하기 (1)_files/zrt_lookup_fy2021(1).html" data-google-container-id="a!5" tabindex="0" title="Advertisement" aria-label="Advertisement" data-google-query-id="CNqqldOKiY8DFVZgDwIdImIJ3g" data-load-complete="true"></iframe></div></ins></html>

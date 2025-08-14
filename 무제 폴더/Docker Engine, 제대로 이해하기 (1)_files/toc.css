@@ -1,0 +1,109 @@
+/* custom card style */
+
+.toc-btn {
+    position: fixed;
+    right: 20px;
+    top: 45%;
+    cursor: pointer;
+    flex-direction: row;
+    display: none;
+}
+
+.toc-btn.display {
+    display: block;
+}
+
+.toc-app-common {
+    padding: 1rem;
+    top: 20%;
+    width: 15.3rem;
+    right: 0px;
+    position: fixed;
+    margin: 0;
+}
+
+.toc-elements {
+    display: none;
+}
+
+.toc-elements.display {
+    display: block;
+}
+
+.toc-app-basic {
+    position: fixed;
+}
+
+.toc-app-bottom {
+    position: absolute;
+}
+
+/* custom item style */
+
+.items {
+    height: auto;
+    width: 15.3rem;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+}
+
+.items::-webkit-scrollbar {
+    display: none !important;
+}
+
+.toc-common {
+    display: block;
+    cursor: pointer;
+    color: darkgrey;
+}
+
+.toc-level-1 {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    font-weight: bold;
+}
+
+.toc-level-2 {
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    margin-left: 0.8rem;
+}
+
+.toc-level-3 {
+    font-size: 0.75rem;
+    margin-top: 0.3rem;
+    margin-left: 1.5rem;
+}
+
+.toc-level-4 {
+    font-size: 0.75rem;
+    margin-top: 0.3rem;
+    margin-left: 2.2rem;
+}
+
+.toc-active, .toc-common:hover {
+    color: #0593d3;
+}
+
+.toc-parent-active {
+    color: #0592d383;
+}
+
+.toc-btn svg {
+    fill: #f0f0f0;
+    margin-left: 7px;
+    padding-top: 15px;
+}
+
+.toc-app-common svg{
+    fill: #eeeeee;
+    margin: 0 30%;
+    cursor: pointer;
+}
+
+@media (max-width: 73.75rem) {
+    .toc-app-common {
+        visibility: hidden;
+    }
+    .toc-btn {display: none;}
+}
